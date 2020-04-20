@@ -1,0 +1,19 @@
+---------------------------
+The theme is KEEP IT ALIVE.
+---------------------------
+
+-Defending something.
+ -Defend an object from a wave of enemies.
+ -Before each wave you get time to prepare.
+  -Building?
+   -Buy tiles using points.
+  -Items
+   -Meds, potions, etc.
+ -Have to survive a certain amounts of waves?
+  -Levels
+   -Starting structure, enemy types
+ -Unlimited waves?
+
+-Get through a level while keeping a certain entity alive.
+ -Follows you around.
+ -Helps you fight enemies?
