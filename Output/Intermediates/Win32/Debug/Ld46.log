@@ -25,11 +25,11 @@ C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\WinMenuState.cpp(40,42):
   HealthSystem.cpp
   HostileSystem.cpp
   MovementSystem.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\Ecs\MovementSystem.cpp(280,1): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\Ecs\MovementSystem.cpp(280,1): warning C4244: '-=': conversion from 'const float' to 'int', possible loss of data
+C:\Users\Its_a\Development\Repos\Ld46\Source\World\Ecs\MovementSystem.cpp(281,1): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Its_a\Development\Repos\Ld46\Source\World\Ecs\MovementSystem.cpp(281,1): warning C4244: '-=': conversion from 'const float' to 'int', possible loss of data
   RenderSystem.cpp
-  TextureTile.cpp
   AnimationTile.cpp
+  TextureTile.cpp
   Generating Code...
   Compiling...
   Tile.cpp
@@ -41,4 +41,5 @@ C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(447,71): warning C4
 C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(447,118): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
 C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(447,118): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Generating Code...
+  LINK : C:\Users\Its_a\Development\Repos\Ld46\Output\Win32\Debug\Ld46.exe not found or not built by the last incremental link; performing full link
   Ld46.vcxproj -> C:\Users\Its_a\Development\Repos\Ld46\Output\Win32\Debug\Ld46.exe

@@ -54,7 +54,7 @@ void GameplayState::update() noexcept
 		}
 		else if (!showedShop)
 		{
-			hudm.msgout.showMessage("Select blocks by clicks the shop icon.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
+			hudm.msgout.showMessage("Select blocks by clicking the shop icon.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
 			tipTimer = 5.0f;
 			showedShop = true;
 		}

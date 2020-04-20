@@ -27,7 +27,7 @@ void AttackSystem::update(Entity &e, float delta) noexcept
 
 		if (button == SDL_BUTTON_LMASK && pc->attackTimer <= 0.0f)
 		{
-			const float speed = 350.0f;
+			const float speed = 400.0f;
 			const SDL_FPoint start{tfc->tf.x + tfc->tf.w / 2 - 18, tfc->tf.y + tfc->tf.h / 2 - 18};
 
 			const double angle = std::atan2(mouse.y + static_cast<double>(pc->world.camera.y) - start.y,
@@ -76,9 +76,9 @@ void AttackSystem::update(Entity &e, float delta) noexcept
 									Mix_PlayChannel(2, pc->game.audioc.getChunk(2), 0);
 								}
 							}
-							else
-								Mix_PlayChannel(4, pjc->game.audioc.getChunk(4), 0);
 						}
+						else
+							Mix_PlayChannel(4, pjc->game.audioc.getChunk(4), 0);
 					}
 				}
 			}

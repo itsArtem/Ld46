@@ -55,7 +55,7 @@ void EntityManager::update(float delta) noexcept
 		camsys.update(e.second);
 		hostileSys.update(e.second, delta);
 		attackSys.update(e.second, delta);
-		
+
 		if (e.second.getComponent<MeleeHostileComponent>() || e.second.getComponent<RangedHostileComponent>())
 			++hostileCount;
 	}
@@ -116,7 +116,7 @@ std::uint32_t createSlime(EntityManager &em, SDL_FPoint pos, SingleAxisAnimation
 		world));
 	const std::uint32_t target = (getRandomBool() == false ? world.getPlayer() : world.getChest());
 	e->addComponent(std::make_unique<FollowComponent>(target, 0.0f));
-	e->addComponent(std::make_unique<MeleeHostileComponent>(5.0f, 1.0f, target));
+	e->addComponent(std::make_unique<MeleeHostileComponent>(5.0f, 1.0f, target, game));
 	e->addComponent(std::make_unique<HealthComponent>(55.0f));
 
 	return id;
@@ -207,7 +207,7 @@ std::uint32_t createGoblin(EntityManager &em, SDL_FPoint pos, DirectionalAnimati
 	e->addComponent(std::make_unique<HealthComponent>(65.0f));
 	const std::uint32_t target = (getRandomBool() == false ? world.getPlayer() : world.getChest());
 	e->addComponent(std::make_unique<FollowComponent>(target, 0.0f));
-	e->addComponent(std::make_unique<MeleeHostileComponent>(5.0f, 1.0f, target));
+	e->addComponent(std::make_unique<MeleeHostileComponent>(5.0f, 1.0f, target, game));
 
 	return id;
 }
@@ -221,27 +221,30 @@ std::uint32_t createProjectile(EntityManager &em, Projectile type, SDL_FPoint po
 	e->addComponent(std::make_unique<VelocityComponent>(velocity, 0.0f, speed, 0.0f));
 	e->addComponent(std::make_unique<CollisionComponent>(SDL_Rect{0, 0, 24, 24}, world));
 	e->addComponent(std::make_unique<RenderComponent>());
-	
+
 	double angle = std::atan2(static_cast<double>(velocity.y), static_cast<double>(velocity.x)) * 180 / M_PI + 90;
 
 	switch (type)
 	{
 	case Projectile::arrow:
+		e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 24.0f, 24.0f}));
 		e->addComponent(std::make_unique<AngledTextureComponent>(game.texc.get(1), SDL_Rect{144, 0, 8, 8}, angle, world));
 		e->addComponent(std::make_unique<ProjectileComponent>(friendly, 15.0f, em, game));
 		break;
 
 
 	case Projectile::dagger:
+		e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 24.0f, 24.0f}));
 		e->addComponent(std::make_unique<AngledTextureComponent>(game.texc.get(1), SDL_Rect{144, 8, 8, 8}, angle, world));
 		e->addComponent(std::make_unique<ProjectileComponent>(friendly, 5.0f, em, game));
 		break;
 
 
 	case Projectile::spear:
-		e->addComponent(std::make_unique<AngledTextureComponent>(game.texc.get(1), SDL_Rect{152, 0, 8, 8}, angle, world));
+		e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 24.0f, 48.0f}));
+		e->addComponent(std::make_unique<AngledTextureComponent>(game.texc.get(1), SDL_Rect{152, 0, 8, 16}, angle, world));
 		e->addComponent(std::make_unique<ProjectileComponent>(friendly, 20.0f, em, game));
-		break; 
+		break;
 	}
 
 	return id;

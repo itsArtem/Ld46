@@ -88,10 +88,11 @@ SingleAxisAnimationComponent::SingleAxisAnimationComponent(SDL_Texture *ss, SDL_
 {
 }
 
-MeleeHostileComponent::MeleeHostileComponent(float damage, float attackDelay, std::uint32_t target) noexcept
+MeleeHostileComponent::MeleeHostileComponent(float damage, float attackDelay, std::uint32_t target, const Game &game) noexcept
 	: damage{damage},
 	attackDelay{attackDelay},
-	target{target}
+	target{target},
+	game{game}
 {
 }
 

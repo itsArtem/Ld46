@@ -209,8 +209,9 @@ struct MeleeHostileComponent final : public Component
 
 	const float attackDelay;
 	float attackTimer = 0.0f;
+	const Game &game;
 
-	MeleeHostileComponent(float damage, float attackDelay, std::uint32_t target) noexcept;
+	MeleeHostileComponent(float damage, float attackDelay, std::uint32_t target, const Game &game) noexcept;
 };
 
 struct RangedHostileComponent final : public Component

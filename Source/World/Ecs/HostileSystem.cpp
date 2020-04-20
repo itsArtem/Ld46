@@ -41,6 +41,7 @@ void HostileSystem::update(Entity &e, float delta) noexcept
 				{
 					hc->health -= mhc->damage;
 					mhc->attackTimer = mhc->attackDelay;
+					Mix_PlayChannel(4, mhc->game.audioc.getChunk(4), 0);
 				}
 			}
 		}
@@ -56,7 +57,7 @@ void HostileSystem::update(Entity &e, float delta) noexcept
 				TransformComponent *ptfc = target->getComponent<TransformComponent>();
 				rhc->attackTimer = rhc->attackDelay;
 
-				const float speed = 350.0f;
+				const float speed = 400.0f;
 				const SDL_FPoint start{tfc->tf.x + tfc->tf.w / 2 - 18, tfc->tf.y + tfc->tf.h / 2 - 18};
 				const SDL_FPoint dst{ptfc->tf.x - tfc->tf.x, ptfc->tf.y - tfc->tf.y};
 
@@ -65,7 +66,7 @@ void HostileSystem::update(Entity &e, float delta) noexcept
 				const SDL_FPoint velocity{static_cast<float>(std::cos(angle * M_PI / -180) * speed),
 					static_cast<float>(std::sin(angle * M_PI / -180) * speed)};
 
-				createProjectile(rhc->em, Projectile::arrow, start, velocity, speed, false, cc->world, rhc->game);
+				createProjectile(rhc->em, rhc->projectile, start, velocity, speed, false, cc->world, rhc->game);
 				rhc->attackTimer = rhc->attackDelay;
 
 				Mix_PlayChannel(3, rhc->game.audioc.getChunk(3), 0);

@@ -185,10 +185,11 @@ void MovementSystem::update(Entity &e, float delta) const noexcept
 			CollisionComponent *const occ = oe->getComponent<CollisionComponent>();
 			ProjectileComponent *const opjc = oe->getComponent<ProjectileComponent>();
 
-			if ((pjc && ((pjc->friendly && oe->id == cc->world.getPlayer()) || opjc))
+			if ((pjc && ((pjc->friendly && (oe->id == cc->world.getPlayer() || oe->id == cc->world.getChest())) || opjc))
 				|| (pjc && ((!pjc->friendly && oe->id != cc->world.getPlayer() && oe->id != cc->world.getChest()) || opjc))
 				|| !pjc && opjc)
 				continue;
+
 
 
 			const SDL_Rect cb{static_cast<int>(otfc->tf.x) + occ->bounds.x, static_cast<int>(otfc->tf.y) + occ->bounds.y + occ->bounds.h / 2, occ->bounds.w, occ->bounds.h / 2 + 8};
