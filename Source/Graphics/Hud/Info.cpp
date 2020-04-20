@@ -17,7 +17,7 @@ Info::Info(const Game &game, const World &world) noexcept
 
 	wave.dstRect.x = 24.0f;
 	wave.dstRect.y = game.getWindowSize().y - 76.0f;
-	
+
 	level.dstRect.x = 24.0f;
 	level.dstRect.y = game.getWindowSize().y - 44.0f;
 }
@@ -29,7 +29,7 @@ void Info::update() noexcept
 	prep.dstRect.y = game.getWindowSize().y - 108.0f;
 	wave.dstRect.y = game.getWindowSize().y - 76.0f;
 	level.dstRect.y = game.getWindowSize().y - 44.0f;
-	
+
 	if (player)
 	{
 		const PlayerComponent *const pc = player->getComponent<PlayerComponent>();
@@ -57,20 +57,22 @@ void Info::render() const noexcept
 	const SDL_Rect leftDstRect{4, game.getWindowSize().y - 124, 296, 120};
 	SDL_RenderCopy(rdr, bg, &lbgSrcRect, &leftDstRect);
 
-	const SDL_Rect rightDstRect{game.getWindowSize().x - 300, game.getWindowSize().y - 100, 296, 96};
-	SDL_RenderCopy(rdr, bg, &rbgSrcRect, &rightDstRect);
-
-	prep.render(rdr, Text::Shadow::right);
-	wave.render(rdr, Text::Shadow::right);
-	level.render(rdr, Text::Shadow::right);
-
 	const Entity *player = world.em.getEntity(world.getPlayer());
 
 	if (player)
 	{
 		const PlayerComponent *const pc = player->getComponent<PlayerComponent>();
 
-		if (pc->preparation)
+		if (pc && pc->preparation)
+		{
+			const SDL_Rect rightDstRect{game.getWindowSize().x - 300, game.getWindowSize().y - 100, 296, 96};
+			SDL_RenderCopy(rdr, bg, &rbgSrcRect, &rightDstRect);
+
 			points.render(rdr, Text::Shadow::right);
+		}
 	}
+
+	prep.render(rdr, Text::Shadow::right);
+	wave.render(rdr, Text::Shadow::right);
+	level.render(rdr, Text::Shadow::right);
 }

@@ -254,6 +254,7 @@
     <ClInclude Include="Source\World\World.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Docs\Cover.png" />
     <Image Include="Resources\Docs\Screenshot1.png" />
     <Image Include="Resources\Docs\Screenshot2.png" />
     <Image Include="Resources\Levels\Level1.png" />
@@ -272,6 +273,7 @@
     <Image Include="Resources\Textures\UiSheet.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resource.aps" />
     <None Include="Resources\Audio\Music\Track1.mid" />
     <None Include="Resources\Audio\Music\Track2.mid" />
     <None Include="Resources\Audio\Music\Track3.mid" />

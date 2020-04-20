@@ -313,6 +313,9 @@
     <Image Include="Resources\Textures\Icon.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Docs\Cover.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Save.dat" />
@@ -320,6 +323,7 @@
     <None Include="Resources\Audio\Music\Track2.mid" />
     <None Include="Resources\Audio\Music\Track3.mid" />
     <None Include="Resources\Audio\Music\Track4.mid" />
+    <None Include="Resource.aps" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Fonts\Font.ttf" />
