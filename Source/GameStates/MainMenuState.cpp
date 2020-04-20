@@ -14,7 +14,7 @@ MainMenuState::MainMenuState(Game &game)
 	title.dstRect.y = 50;
 
 	info.setWrappedText(game.fontc.get(1),
-		"Move around with WASP.\n"
+		"Move around with WASD.\n"
 		"Left click to buy block and right click to sell.\n"
 		"Defend your loot from waves of enemies.\n"
 		"Get to the final level to win!",

@@ -1,6 +1,6 @@
-﻿  AboutMenuState.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\AboutMenuState.cpp(28,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\AboutMenuState.cpp(37,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+﻿  MainMenuState.cpp
+C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\MainMenuState.cpp(27,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\MainMenuState.cpp(38,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Generating code
   1 of 2241 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
