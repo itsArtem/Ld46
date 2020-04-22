@@ -316,6 +316,27 @@
     <Image Include="Resources\Docs\Cover.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Docs\Screenshot 1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 5 Final.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 3 Final.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 4 Final.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 7 final.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 6 Final.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Save.dat" />

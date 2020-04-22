@@ -95,6 +95,9 @@ void World::update() noexcept
 
 					if (pc->tileSelected != id && pc->points >= costs[pc->tileSelected])
 					{
+						if (costs.find(id) != costs.end())
+							pc->points += costs.at(id);
+
 						switch (pc->tileSelected)
 						{
 						case 3:

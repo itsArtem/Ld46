@@ -1,9 +1,17 @@
-﻿  MainMenuState.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\MainMenuState.cpp(27,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\MainMenuState.cpp(38,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+﻿  GameOverMenuState.cpp
+C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\GameOverMenuState.cpp(30,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\GameOverMenuState.cpp(39,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  HealthSystem.cpp
+  World.cpp
+C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(86,61): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(87,61): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,71): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,71): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,118): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,118): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Generating code
-  1 of 2241 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  4 of 2241 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Ld46.vcxproj -> C:\Users\Its_a\Development\Repos\Ld46\Output\Win32\Release\Ld46.exe

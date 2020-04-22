@@ -44,7 +44,7 @@ private:
 	SDL_Renderer *rdr = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	float delta = 0.0f;
 
-	int nextTrack = 1;
+	int nextTrack = 0;
 
 	void update() noexcept;
 	void render() const noexcept;

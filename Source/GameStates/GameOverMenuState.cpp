@@ -40,10 +40,7 @@ void GameOverMenuState::update() noexcept
 	canvas.update();
 
 	if (canvas.get(0).isReleased())
-	{
 		game.toMainMenu();
-		return;
-	}
 }
 
 void GameOverMenuState::render() const noexcept

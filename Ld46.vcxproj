@@ -255,6 +255,13 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Docs\Cover.png" />
+    <Image Include="Resources\Docs\Screenshot 1.png" />
+    <Image Include="Resources\Docs\Screenshot 2.png" />
+    <Image Include="Resources\Docs\Screenshot 3 Final.png" />
+    <Image Include="Resources\Docs\Screenshot 4 Final.png" />
+    <Image Include="Resources\Docs\Screenshot 5 Final.png" />
+    <Image Include="Resources\Docs\Screenshot 6 Final.png" />
+    <Image Include="Resources\Docs\Screenshot 7 final.png" />
     <Image Include="Resources\Docs\Screenshot1.png" />
     <Image Include="Resources\Docs\Screenshot2.png" />
     <Image Include="Resources\Levels\Level1.png" />

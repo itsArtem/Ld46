@@ -148,7 +148,7 @@ void Game::update() noexcept
 		Mix_PlayMusic(audioc.getMusic(nextTrack++), 0);
 		Mix_VolumeMusic(13);
 
-		if (nextTrack > 4)
+		if (nextTrack > 3)
 			nextTrack = 0;
 	}
 
@@ -174,6 +174,12 @@ void Game::moveData(Game &game) noexcept
 	running = game.running;
 	game.running = false;
 	
+	texc = std::move(game.texc);
+	fontc = std::move(game.fontc);
+	audioc = std::move(game.audioc);
+
+	gsm = std::move(game.gsm);
+
 	window = std::move(game.window);
 	game.window = nullptr;
 	
@@ -182,6 +188,9 @@ void Game::moveData(Game &game) noexcept
 	
 	delta = game.delta;
 	game.delta = 0.0f;
+
+	nextTrack = std::move(game.nextTrack);
+	game.nextTrack = 0;
 }
 
 void Game::destroyGraphics() noexcept

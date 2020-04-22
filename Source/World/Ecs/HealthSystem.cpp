@@ -21,6 +21,14 @@ void HealthSystem::update() noexcept
 		{
 			Entity &e = em.entities.at(it->first);
 
+			PlayerComponent *const pc = e.getComponent<PlayerComponent>();
+			
+			if (pc)
+			{
+				pc->game.gsm.add(std::make_unique<GameOverMenuState>(pc->game, pc->score));
+				return;
+			}
+
 			const RenderComponent *const rc = e.getComponent<RenderComponent>();
 			const CollisionComponent *const cc = e.getComponent<CollisionComponent>();
 
@@ -46,13 +54,6 @@ void HealthSystem::update() noexcept
 						break;
 					}
 				}
-			}
-
-			PlayerComponent *const pc = e.getComponent<PlayerComponent>();
-			if (pc)
-			{
-				pc->game.gsm.add(std::make_unique<GameOverMenuState>(pc->game, pc->score));
-				return;
 			}
 
 			it = em.entities.erase(it);
