@@ -256,7 +256,7 @@ void MovementSystem::update(Entity &e, float delta) const noexcept
 				if (tile->props.breakable)
 				{
 					if (pjc && !pjc->friendly)
-						tile->props.health -= pjc->damage;
+						tile->props.health -= static_cast<int>(pjc->damage);
 					else if (!pjc)
 					{
 						MeleeHostileComponent *mhc = e.getComponent<MeleeHostileComponent>();
@@ -267,7 +267,7 @@ void MovementSystem::update(Entity &e, float delta) const noexcept
 
 							if (mhc->attackTimer <= 0.0f)
 							{
-								tile->props.health -= mhc->damage;
+								tile->props.health -= static_cast<int>(mhc->damage);
 								mhc->attackTimer = mhc->attackDelay;
 							}
 						}

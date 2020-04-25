@@ -275,7 +275,7 @@ void World::render() const noexcept
 			const PlayerComponent *const pc = playerEntity->getComponent<PlayerComponent>();
 
 			if (pc && pc->preparation)
-				SDL_RenderCopy(rdr, game.texc.get(2), &outlineSrcRect, &outlineDstRect);
+				SDL_RenderCopyF(rdr, game.texc.get(2), &outlineSrcRect, &outlineDstRect);
 		}
 	}
 
@@ -447,9 +447,9 @@ void World::load(const std::string &path)
 	em.collidables.clear();
 	em.entities.clear();
 
-	const SDL_FPoint start{(size.x - 1) / 2 * Tile::Properties::size - 1 + 4, (size.y - 1) / 2 * Tile::Properties::size + 4};
+	const SDL_FPoint start{(size.x - 1.0f) / 2.0f * Tile::Properties::size - 1.0f + 4.0f, (size.y - 1.0f) / 2.0f * Tile::Properties::size + 4.0f};
 	chest = createChest(em, start, *this, game);
-	player = createPlayer(em, {start.x, start.y + 100.0f}, DirectionalAnimationComponent::Direction::down, *this, game);
+	player = createPlayer(em, {start.x, start.y + 100}, DirectionalAnimationComponent::Direction::down, *this, game);
 }
 
 void World::progress() noexcept

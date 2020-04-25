@@ -23,10 +23,10 @@ AboutMenuState::AboutMenuState(Game &game)
 		480,
 		game.getRenderer());
 
-	info.dstRect.w = 460;
-	info.dstRect.h = 210;
-	info.dstRect.x = game.getWindowSize().x - 600;
-	info.dstRect.y = 220;
+	info.dstRect.w = 460.0f;
+	info.dstRect.h = 210.0f;
+	info.dstRect.x = game.getWindowSize().x - 600.0f;
+	info.dstRect.y = 220.0f;
 
 	canvas.add(std::make_unique<TextButton>(SDL_Point{200, 295}, game, TextButton::Properties{Text{game.fontc.get(1), "Back", {255, 255, 255, 255}, true, game.getRenderer()}, ButtonHoverEffect::enlarge}));
 }
@@ -34,7 +34,7 @@ AboutMenuState::AboutMenuState(Game &game)
 void AboutMenuState::update() noexcept
 {
 	title.dstRect.x = game.getWindowSize().x / 2 - title.dstRect.w / 2;
-	info.dstRect.x = game.getWindowSize().x - 600;
+	info.dstRect.x = game.getWindowSize().x - 600.0f;
 	canvas.update();
 
 	if (canvas.get(0).isReleased())

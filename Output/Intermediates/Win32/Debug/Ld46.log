@@ -1,8 +1,2 @@
 ﻿  World.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(86,61): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(87,61): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,71): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,71): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,118): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,118): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Ld46.vcxproj -> C:\Users\Its_a\Development\Repos\Ld46\Output\Win32\Debug\Ld46.exe

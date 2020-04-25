@@ -62,7 +62,7 @@ private:
 	SDL_Point mouse;
 	std::unordered_map<int, int> costs;
 	SDL_Rect buildBounds{64, 64, game.getWindowSize().x - 64, game.getWindowSize().y - 64};
-	SDL_Rect outlineDstRect{0, 0, Tile::Properties::size, Tile::Properties::size};
+	SDL_FRect outlineDstRect{0.0f, 0.0f, static_cast<float>(Tile::Properties::size), static_cast<float>(Tile::Properties::size)};
 	SDL_Rect outlineSrcRect{128, 0, 16, 16};
 
 	//void createLightRadius(SDL_Point pos, int radius, int darkness) noexcept;
