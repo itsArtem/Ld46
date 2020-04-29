@@ -225,7 +225,7 @@ void World::update() noexcept
 
 			pc->prepareTimer -= 1 * delta;
 
-			if (pc->prepareTimer <= 0.0f)
+			if (pc->prepareTimer <= 0.0f || wave == finalWave)
 			{
 				pc->preparation = false;
 				pc->prepareTimer = pc->prepareTime;

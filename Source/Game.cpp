@@ -28,7 +28,7 @@ Game::Game()
 
 	SDL_SetWindowMinimumSize(window, 1100, 680);
 	SDL_SetRenderDrawBlendMode(rdr, SDL_BLENDMODE_BLEND);
-	
+
 	SDL_Surface *icon = IMG_Load("Resources/Textures/Icon.png");
 	SDL_SetWindowIcon(window, icon);
 	SDL_FreeSurface(icon);
@@ -36,7 +36,7 @@ Game::Game()
 	texc.load("Resources/Textures/TileSheet.png", rdr);
 	texc.load("Resources/Textures/EntitySheet.png", rdr);
 	texc.load("Resources/Textures/UiSheet.png", rdr);
-	
+
 	fontc.open("Resources/Fonts/Font.ttf", 26);
 	fontc.open("Resources/Fonts/Font.ttf", 32);
 	fontc.open("Resources/Fonts/Font.ttf", 48);
@@ -80,7 +80,8 @@ Game &Game::operator =(Game &&game) noexcept
 void Game::run() noexcept
 {
 	running = true;
-
+	std::thread musicThread{&Game::loopMusic, this};
+	
 	using namespace std::chrono;
 	high_resolution_clock::time_point lastTime{high_resolution_clock::now()};
 #if DEBUG
@@ -107,9 +108,11 @@ void Game::run() noexcept
 		}
 #endif
 	}
+
+	musicThread.join();
 }
 
-void Game::setFullscreen(bool fullscreen)
+void Game::setFullscreen(bool fullscreen) noexcept
 {
 	if (fullscreen)
 	{
@@ -143,15 +146,6 @@ void Game::toMainMenu() noexcept
 
 void Game::update() noexcept
 {
-	if (!Mix_PlayingMusic())
-	{
-		Mix_PlayMusic(audioc.getMusic(nextTrack++), 0);
-		Mix_VolumeMusic(13);
-
-		if (nextTrack > 3)
-			nextTrack = 0;
-	}
-
 	SDL_Event event;
 
 	while (SDL_PollEvent(&event))
@@ -169,11 +163,26 @@ void Game::render() const noexcept
 	SDL_RenderClear(rdr);
 }
 
+void Game::loopMusic() noexcept
+{
+	int nextTrack = 0;
+
+	while (running)
+		if (!Mix_PlayingMusic())
+		{
+			Mix_PlayMusic(audioc.getMusic(nextTrack++), 0);
+			Mix_VolumeMusic(13);
+
+			if (nextTrack > 3)
+				nextTrack = 0;
+		}
+}
+
 void Game::moveData(Game &game) noexcept
 {
 	running = game.running;
 	game.running = false;
-	
+
 	texc = std::move(game.texc);
 	fontc = std::move(game.fontc);
 	audioc = std::move(game.audioc);
@@ -182,15 +191,12 @@ void Game::moveData(Game &game) noexcept
 
 	window = std::move(game.window);
 	game.window = nullptr;
-	
+
 	rdr = std::move(game.rdr);
 	game.rdr = nullptr;
-	
+
 	delta = game.delta;
 	game.delta = 0.0f;
-
-	nextTrack = std::move(game.nextTrack);
-	game.nextTrack = 0;
 }
 
 void Game::destroyGraphics() noexcept

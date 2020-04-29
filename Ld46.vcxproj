@@ -280,6 +280,7 @@
     <Image Include="Resources\Textures\UiSheet.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LICENSE.md" />
     <None Include="README.md" />
     <None Include="Resource.aps" />
     <None Include="Resources\Audio\Music\Track1.mid" />

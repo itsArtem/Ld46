@@ -9,6 +9,8 @@
 #include <SDL_render.h>
 #include <SDL_rect.h>
 
+#include <thread>
+
 class Game final
 {
 public:
@@ -31,7 +33,7 @@ public:
 	Game &operator =(Game &&game) noexcept;
 
 	void run() noexcept;
-	void setFullscreen(bool fullscreen);
+	void setFullscreen(bool fullscreen) noexcept;
 	[[nodiscard]] SDL_Point getWindowSize() const noexcept;
 
 	void toMainMenu() noexcept;
@@ -44,10 +46,10 @@ private:
 	SDL_Renderer *rdr = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	float delta = 0.0f;
 
-	int nextTrack = 0;
-
 	void update() noexcept;
 	void render() const noexcept;
+
+	void loopMusic() noexcept;
 
 	void moveData(Game &game) noexcept;
 	void destroyGraphics() noexcept;

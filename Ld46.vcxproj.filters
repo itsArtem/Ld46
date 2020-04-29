@@ -346,6 +346,7 @@
     <None Include="Resources\Audio\Music\Track4.mid" />
     <None Include="Resource.aps" />
     <None Include="README.md" />
+    <None Include="LICENSE.md" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Fonts\Font.ttf" />
