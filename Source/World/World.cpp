@@ -447,7 +447,7 @@ void World::load(const std::string &path)
 	em.collidables.clear();
 	em.entities.clear();
 
-	const SDL_FPoint start{(size.x - 1.0f) / 2.0f * Tile::Properties::size - 1.0f + 4.0f, (size.y - 1.0f) / 2.0f * Tile::Properties::size + 4.0f};
+	const SDL_FPoint start{((size.x - 1) * Tile::Properties::size - Tile::Properties::size) / 2 + 4.0f, ((size.y - 1) * Tile::Properties::size - Tile::Properties::size) / 2 + 4.0f};
 	chest = createChest(em, start, *this, game);
 	player = createPlayer(em, {start.x, start.y + 100}, DirectionalAnimationComponent::Direction::down, *this, game);
 }

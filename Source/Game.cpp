@@ -81,7 +81,7 @@ void Game::run() noexcept
 {
 	running = true;
 	std::thread musicThread{&Game::loopMusic, this};
-	
+
 	using namespace std::chrono;
 	high_resolution_clock::time_point lastTime{high_resolution_clock::now()};
 #if DEBUG
@@ -166,16 +166,38 @@ void Game::render() const noexcept
 void Game::loopMusic() noexcept
 {
 	int nextTrack = 0;
+	Mix_PlayMusic(audioc.getMusic(nextTrack++), 0);
+	using namespace std::chrono;
+	steady_clock::time_point start{steady_clock::now()};
+	steady_clock::duration duration = minutes{3} + seconds{1};
 
 	while (running)
-		if (!Mix_PlayingMusic())
+	{
+		/* 
+		Mix_Playing() tries to read or write to a bad memory address, so I have to manually check if something is playing. 
+		Not sure if it's just me or an SDL Mixer bug.
+		*/	
+		const steady_clock::time_point now{steady_clock::now()};
+		if (now - start >= duration)
 		{
-			Mix_PlayMusic(audioc.getMusic(nextTrack++), 0);
-			Mix_VolumeMusic(13);
+			switch (nextTrack)
+			{
+			case 0:
+			case 2:
+				duration = minutes{3} + seconds{1};
+				break;
+			case 1:
+				duration = minutes{3} + seconds{15};
+				break;
+			case 3:
+				duration = minutes{2} + seconds{34};
+				break;
+			}
 
-			if (nextTrack > 3)
-				nextTrack = 0;
+			Mix_PlayMusic(audioc.getMusic(nextTrack++), 0);
+			start = now;
 		}
+	}
 }
 
 void Game::moveData(Game &game) noexcept
