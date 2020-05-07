@@ -17,7 +17,7 @@ void HealthSystem::update() noexcept
 		const HealthComponent *const hc = it->second.getComponent<HealthComponent>();
 		const ProjectileComponent *const pjc = it->second.getComponent<ProjectileComponent>();
 
-		if ((hc && hc->health <= 0) || (pjc && (pjc->timer <= 0.0f || pjc->hit || pjc->stop)))
+		if ((hc && hc->health <= 0) || (pjc && (pjc->alpha <= 0.0f || pjc->hit || pjc->stop)))
 		{
 			Entity &e = em.entities.at(it->first);
 

@@ -4,12 +4,12 @@
 #include "Graphics/FontCache.h"
 #include "AudioCache.h"
 #include "GameStates/GameStateManager.h"
-#include "Files/GameSave.h"
-#include "Files/Config.h"
 
 #include <SDL_video.h>
 #include <SDL_render.h>
 #include <SDL_rect.h>
+
+#include <thread>
 
 class Game final
 {
@@ -21,8 +21,6 @@ public:
 	AudioCache audioc;
 
 	GameStateManager gsm;
-	GameSave gameSave{"Resources/Save/Game.sav"};
-	Config config{"Resources/Save/Config.dat"};
 
 	Game();
 
@@ -35,7 +33,6 @@ public:
 	Game &operator =(Game &&game) noexcept;
 
 	void run() noexcept;
-	
 	void setFullscreen(bool fullscreen) noexcept;
 	[[nodiscard]] SDL_Point getWindowSize() const noexcept;
 
@@ -46,7 +43,7 @@ public:
 
 private:
 	SDL_Window *window = SDL_CreateWindow("Defend the Loot!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1100, 680, SDL_WINDOW_RESIZABLE);
-	SDL_Renderer *rdr = nullptr;
+	SDL_Renderer *rdr = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	float delta = 0.0f;
 
 	void update() noexcept;

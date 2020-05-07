@@ -2,5 +2,5 @@
 
 enum class Projectile
 {
-	arrow, dagger, spear, star, fork, iceArrow
+	arrow, dagger, spear
 };

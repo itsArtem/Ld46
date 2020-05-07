@@ -52,9 +52,9 @@ void EntityManager::update(float delta) noexcept
 
 		msys.update(e.second, delta);
 		rdrsys.update(e.second, delta);
+		camsys.update(e.second);
 		hostileSys.update(e.second, delta);
 		attackSys.update(e.second, delta);
-		camsys.update(e.second);
 
 		if (e.second.getComponent<MeleeHostileComponent>() || e.second.getComponent<RangedHostileComponent>())
 			++hostileCount;
@@ -122,7 +122,7 @@ std::uint32_t createSlime(EntityManager &em, SDL_FPoint pos, SingleAxisAnimation
 	return id;
 }
 
-std::uint32_t createArcher(EntityManager &em, SDL_FPoint pos, DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept
+std::uint32_t createArcher(EntityManager &em, SDL_FPoint pos, DirectionalAnimationComponent::Direction dir, World &world, const Game &game, Projectile projectile) noexcept
 {
 	const std::uint32_t id = em.createEntity();
 	Entity *const e = em.getEntity(id);
@@ -146,8 +146,8 @@ std::uint32_t createArcher(EntityManager &em, SDL_FPoint pos, DirectionalAnimati
 		world));
 	e->addComponent(std::make_unique<HealthComponent>(60.0f));
 	const std::uint32_t target = (getRandomBool() == false ? world.getPlayer() : world.getChest());
-	e->addComponent(std::make_unique<FollowComponent>(target, 200.0f));
-	e->addComponent(std::make_unique<RangedHostileComponent>(1.2f, target, Projectile::arrow, em, game));
+	e->addComponent(std::make_unique<FollowComponent>(target, 100.0f));
+	e->addComponent(std::make_unique<RangedHostileComponent>(1.0f, target, projectile, em, game));
 
 	return id;
 }
@@ -177,7 +177,7 @@ std::uint32_t createDarkLord(EntityManager &em, SDL_FPoint pos, DirectionalAnima
 	e->addComponent(std::make_unique<HealthComponent>(70.0f));
 	const std::uint32_t target = (getRandomBool() == false ? world.getPlayer() : world.getChest());
 	e->addComponent(std::make_unique<FollowComponent>(target, 150.0f));
-	e->addComponent(std::make_unique<RangedHostileComponent>(1.4f, target, projectile, em, game));
+	e->addComponent(std::make_unique<RangedHostileComponent>(1.3f, target, projectile, em, game));
 
 	return id;
 }
@@ -190,7 +190,7 @@ std::uint32_t createGoblin(EntityManager &em, SDL_FPoint pos, DirectionalAnimati
 	SDL_Texture *const ss = game.texc.get(1);
 
 	e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 80.0f, 80.0f}));
-	e->addComponent(std::make_unique<VelocityComponent>(SDL_FPoint{0.0f, 0.0f}, 3300.0f, 130.0f, 3300.0f));
+	e->addComponent(std::make_unique<VelocityComponent>(SDL_FPoint{0.0f, 0.0f}, 3000.0f, 100.0f, 3000.0f));
 	e->addComponent(std::make_unique<CollisionComponent>(SDL_Rect{20, 0, 30, 80}, world));
 	e->addComponent(std::make_unique<RenderComponent>());
 	e->addComponent(std::make_unique<DirectionalAnimationComponent>(ss,
@@ -206,8 +206,9 @@ std::uint32_t createGoblin(EntityManager &em, SDL_FPoint pos, DirectionalAnimati
 		world));
 	e->addComponent(std::make_unique<HealthComponent>(65.0f));
 	const std::uint32_t target = (getRandomBool() == false ? world.getPlayer() : world.getChest());
-	e->addComponent(std::make_unique<FollowComponent>(target, 100.0f));
-	e->addComponent(std::make_unique<RangedHostileComponent>(1.4f, target, Projectile::spear, em, game));
+	e->addComponent(std::make_unique<FollowComponent>(target, 0.0f));
+	e->addComponent(std::make_unique<MeleeHostileComponent>(5.0f, 1.0f, target, game));
+
 	return id;
 }
 
@@ -235,31 +236,13 @@ std::uint32_t createProjectile(EntityManager &em, Projectile type, SDL_FPoint po
 	case Projectile::dagger:
 		e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 24.0f, 24.0f}));
 		e->addComponent(std::make_unique<AngledTextureComponent>(game.texc.get(1), SDL_Rect{144, 8, 8, 8}, angle, world));
-		e->addComponent(std::make_unique<ProjectileComponent>(friendly, 10.0f, em, game));
+		e->addComponent(std::make_unique<ProjectileComponent>(friendly, 5.0f, em, game));
 		break;
 
 
 	case Projectile::spear:
 		e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 24.0f, 48.0f}));
 		e->addComponent(std::make_unique<AngledTextureComponent>(game.texc.get(1), SDL_Rect{152, 0, 8, 16}, angle, world));
-		e->addComponent(std::make_unique<ProjectileComponent>(friendly, 25.0f, em, game));
-		break;
-
-	case Projectile::star:
-		e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 24.0f, 24.0f}));
-		e->addComponent(std::make_unique<AngledTextureComponent>(game.texc.get(1), SDL_Rect{160, 0, 8, 8}, angle, world));
-		e->addComponent(std::make_unique<ProjectileComponent>(friendly, 5.0f, em, game));
-		break;
-
-	case Projectile::fork:
-		e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 24.0f, 24.0f}));
-		e->addComponent(std::make_unique<AngledTextureComponent>(game.texc.get(1), SDL_Rect{160, 8, 8, 8}, angle, world));
-		e->addComponent(std::make_unique<ProjectileComponent>(friendly, 40.0f, em, game));
-		break;
-
-	case Projectile::iceArrow:
-		e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 24.0f, 24.0f}));
-		e->addComponent(std::make_unique<AngledTextureComponent>(game.texc.get(1), SDL_Rect{168, 0, 8, 8}, angle, world));
 		e->addComponent(std::make_unique<ProjectileComponent>(friendly, 20.0f, em, game));
 		break;
 	}
@@ -279,121 +262,5 @@ std::uint32_t createChest(EntityManager &em, SDL_FPoint pos, World &world, const
 	e->addComponent(std::make_unique<RenderComponent>());
 	e->addComponent(std::make_unique<HealthComponent>(500.0f));
 
-	return id;
-}
-
-std::uint32_t createIceDemon(EntityManager &em, SDL_FPoint pos, DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept
-{
-	const std::uint32_t id = em.createEntity();
-	Entity *const e = em.getEntity(id);
-
-	SDL_Texture *const ss = game.texc.get(1);
-
-	e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 80.0f, 80.0f}));
-	e->addComponent(std::make_unique<VelocityComponent>(SDL_FPoint{0.0f, 0.0f}, 2900.0f, 90.0f, 2900.0f));
-	e->addComponent(std::make_unique<CollisionComponent>(SDL_Rect{20, 0, 30, 80}, world));
-	e->addComponent(std::make_unique<RenderComponent>());
-	e->addComponent(std::make_unique<DirectionalAnimationComponent>(ss,
-		SDL_Rect{0, 192, 16, 16},
-		SDL_Rect{0, 192 + 16, 16, 16},
-		SDL_Rect{0, 192 + 32, 16, 16},
-		SDL_Rect{0, 192 + 48, 16, 16},
-		Animation{ss, {16, 192, 16, 16}, 4, 100.0f},
-		Animation{ss, {16, 192 + 16, 16, 16}, 4, 100.0f},
-		Animation{ss, {16, 192 + 32, 16, 16}, 4, 100.0f},
-		Animation{ss, {16, 192 + 48, 16, 16}, 4, 100.0f},
-		dir,
-		world));
-	e->addComponent(std::make_unique<HealthComponent>(65.0f));
-	const std::uint32_t target = (getRandomBool() == false ? world.getPlayer() : world.getChest());
-	e->addComponent(std::make_unique<FollowComponent>(target, 120.0f));
-	e->addComponent(std::make_unique<RangedHostileComponent>(1.0f, target, Projectile::iceArrow, em, game));
-	return id;
-}
-
-std::uint32_t createZombie(EntityManager &em, SDL_FPoint pos, DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept
-{
-	const std::uint32_t id = em.createEntity();
-	Entity *const e = em.getEntity(id);
-
-	SDL_Texture *const ss = game.texc.get(1);
-
-	e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 80.0f, 80.0f}));
-	e->addComponent(std::make_unique<VelocityComponent>(SDL_FPoint{0.0f, 0.0f}, 2600.0f, 60.0f, 2600.0f));
-	e->addComponent(std::make_unique<CollisionComponent>(SDL_Rect{20, 0, 30, 80}, world));
-	e->addComponent(std::make_unique<RenderComponent>());
-	e->addComponent(std::make_unique<DirectionalAnimationComponent>(ss,
-		SDL_Rect{80, 96, 16, 16},
-		SDL_Rect{80, 96 + 16, 16, 16},
-		SDL_Rect{80, 96 + 32, 16, 16},
-		SDL_Rect{80, 96 + 48, 16, 16},
-		Animation{ss, {96, 96, 16, 16}, 4, 100.0f},
-		Animation{ss, {96, 96 + 16, 16, 16}, 4, 100.0f},
-		Animation{ss, {96, 96 + 32, 16, 16}, 4, 100.0f},
-		Animation{ss, {96, 96 + 48, 16, 16}, 4, 100.0f},
-		dir,
-		world));
-	e->addComponent(std::make_unique<HealthComponent>(50.0f));
-	const std::uint32_t target = (getRandomBool() == false ? world.getPlayer() : world.getChest());
-	e->addComponent(std::make_unique<FollowComponent>(target, 0.0f));
-	e->addComponent(std::make_unique<MeleeHostileComponent>(8.0f, 0.5f, target, game));
-	return id;
-}
-
-std::uint32_t createKnight(EntityManager &em, SDL_FPoint pos, DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept
-{
-	const std::uint32_t id = em.createEntity();
-	Entity *const e = em.getEntity(id);
-
-	SDL_Texture *const ss = game.texc.get(1);
-
-	e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 80.0f, 80.0f}));
-	e->addComponent(std::make_unique<VelocityComponent>(SDL_FPoint{0.0f, 0.0f}, 2900.0f, 90.0f, 2900.0f));
-	e->addComponent(std::make_unique<CollisionComponent>(SDL_Rect{20, 0, 30, 80}, world));
-	e->addComponent(std::make_unique<RenderComponent>());
-	e->addComponent(std::make_unique<DirectionalAnimationComponent>(ss,
-		SDL_Rect{80, 160, 16, 16},
-		SDL_Rect{80, 160 + 16, 16, 16},
-		SDL_Rect{80, 160 + 32, 16, 16},
-		SDL_Rect{80, 160 + 48, 16, 16},
-		Animation{ss, {96, 160, 16, 16}, 4, 100.0f},
-		Animation{ss, {96, 160 + 16, 16, 16}, 4, 100.0f},
-		Animation{ss, {96, 160 + 32, 16, 16}, 4, 100.0f},
-		Animation{ss, {96, 160 + 48, 16, 16}, 4, 100.0f},
-		dir,
-		world));
-	e->addComponent(std::make_unique<HealthComponent>(75.0f));
-	const std::uint32_t target = (getRandomBool() == false ? world.getPlayer() : world.getChest());
-	e->addComponent(std::make_unique<FollowComponent>(target, 0.0f));
-	e->addComponent(std::make_unique<MeleeHostileComponent>(10.0f, 1.1f, target, game));
-	return id;
-}
-
-std::uint32_t createLootLord(EntityManager &em, SDL_FPoint pos, DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept
-{
-	const std::uint32_t id = em.createEntity();
-	Entity *const e = em.getEntity(id);
-
-	SDL_Texture *const ss = game.texc.get(1);
-
-	e->addComponent(std::make_unique<TransformComponent>(SDL_FRect{pos.x, pos.y, 80.0f, 80.0f}));
-	e->addComponent(std::make_unique<VelocityComponent>(SDL_FPoint{0.0f, 0.0f}, 3000.0f, 100.0f, 3000.0f));
-	e->addComponent(std::make_unique<CollisionComponent>(SDL_Rect{20, 0, 30, 80}, world));
-	e->addComponent(std::make_unique<RenderComponent>());
-	e->addComponent(std::make_unique<DirectionalAnimationComponent>(ss,
-		SDL_Rect{176, 0, 16, 16},
-		SDL_Rect{176, 16, 16, 16},
-		SDL_Rect{176, 32, 16, 16},
-		SDL_Rect{176, 48, 16, 16},
-		Animation{ss, {192, 0, 16, 16}, 4, 100.0f},
-		Animation{ss, {192, 16, 16, 16}, 4, 100.0f},
-		Animation{ss, {192, 32, 16, 16}, 4, 100.0f},
-		Animation{ss, {192, 48, 16, 16}, 4, 100.0f},
-		dir,
-		world));
-	e->addComponent(std::make_unique<HealthComponent>(90.0f));
-	const std::uint32_t target = (getRandomBool() == false ? world.getPlayer() : world.getChest());
-	e->addComponent(std::make_unique<FollowComponent>(target, 150.0f));
-	e->addComponent(std::make_unique<RangedHostileComponent>(2.0f, target, Projectile::fork, em, game));
 	return id;
 }

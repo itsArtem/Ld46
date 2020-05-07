@@ -15,41 +15,23 @@
 #include <memory>
 #include <thread>
 #include <cstdint>
-#include <cstddef>
 
 Game::Game()
 {
-	if (!window) [[unlikely]]
+	if (!window || !rdr)
+	{
+		if (window) SDL_DestroyWindow(window);
+		else if (rdr) SDL_DestroyRenderer(rdr);
+
 		throw std::runtime_error{SDL_GetError()};
+	}
 
 	SDL_SetWindowMinimumSize(window, 1100, 680);
+	SDL_SetRenderDrawBlendMode(rdr, SDL_BLENDMODE_BLEND);
 
 	SDL_Surface *icon = IMG_Load("Resources/Textures/Icon.png");
 	SDL_SetWindowIcon(window, icon);
 	SDL_FreeSurface(icon);
-
-	if (config.doesFileExist())
-		config.load();
-	else 
-		config.save();
-
-	if (config.fullscreen)
-		setFullscreen(true);
-
-	int rdrFlags;
-
-	if (config.vSync)
-		rdrFlags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
-	else
-		rdrFlags = SDL_RENDERER_ACCELERATED;
-
-	rdr = SDL_CreateRenderer(window, -1, rdrFlags);
-	if (!rdr) [[unlikely]]
-	{
-		SDL_DestroyWindow(window);
-		throw std::runtime_error{SDL_GetError()};
-	}
-	SDL_SetRenderDrawBlendMode(rdr, SDL_BLENDMODE_BLEND);
 
 	texc.load("Resources/Textures/TileSheet.png", rdr);
 	texc.load("Resources/Textures/EntitySheet.png", rdr);
@@ -63,10 +45,6 @@ Game::Game()
 	audioc.loadMusic("Resources/Audio/Music/Track2.mid");
 	audioc.loadMusic("Resources/Audio/Music/Track3.mid");
 	audioc.loadMusic("Resources/Audio/Music/Track4.mid");
-	audioc.loadMusic("Resources/Audio/Music/Track5.mid");
-	audioc.loadMusic("Resources/Audio/Music/Track6.mid");
-	audioc.loadMusic("Resources/Audio/Music/Track7.mid");
-	audioc.loadMusic("Resources/Audio/Music/Track8.mid");
 
 	audioc.loadChunk("Resources/Audio/Chunks/Attack.wav");
 	audioc.loadChunk("Resources/Audio/Chunks/Break.wav");
@@ -76,9 +54,6 @@ Game::Game()
 	audioc.loadChunk("Resources/Audio/Chunks/Place.wav");
 	audioc.loadChunk("Resources/Audio/Chunks/Remove.wav");
 	audioc.loadChunk("Resources/Audio/Chunks/Select.wav");
-	audioc.loadChunk("Resources/Audio/Chunks/CantPlace.wav");
-
-	Mix_VolumeMusic(1);
 
 	gsm.add(std::make_unique<MainMenuState>(*this));
 	SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
@@ -190,11 +165,11 @@ void Game::render() const noexcept
 
 void Game::loopMusic() noexcept
 {
-	std::size_t nextTrack = 0;
+	int nextTrack = 0;
 	Mix_PlayMusic(audioc.getMusic(nextTrack++), 0);
 	using namespace std::chrono;
 	steady_clock::time_point start{steady_clock::now()};
-	steady_clock::duration duration = minutes{1} + seconds{45};
+	steady_clock::duration duration = minutes{3} + seconds{1};
 
 	while (running)
 	{
@@ -208,34 +183,19 @@ void Game::loopMusic() noexcept
 			switch (nextTrack)
 			{
 			case 0:
-				duration = minutes{1} + seconds{45};
-				break;
-			case 1:
-				duration = minutes{1} + seconds{19};
-				break;
 			case 2:
-				duration = minutes{1} + seconds{39};
-				break;
-			case 3:
-				duration = minutes{1} + seconds{43};
-				break;
-			case 4:
-			case 6:
 				duration = minutes{3} + seconds{1};
 				break;
-			case 5:
+			case 1:
 				duration = minutes{3} + seconds{15};
 				break;
-			case 7:
+			case 3:
 				duration = minutes{2} + seconds{34};
 				break;
 			}
 
 			Mix_PlayMusic(audioc.getMusic(nextTrack++), 0);
 			start = now;
-
-			if (nextTrack > audioc.getMusicCount())
-				nextTrack = 0;
 		}
 	}
 }

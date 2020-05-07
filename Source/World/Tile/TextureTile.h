@@ -11,7 +11,7 @@ class Game;
 class TextureTile : public Tile
 {
 public:
-	TextureTile(Properties props, const World &world, const Game &game, SDL_Texture *ss, SDL_Rect firstSrcRect, int variations) noexcept;
+	TextureTile(Properties props, const World &world, SDL_Texture *ss, SDL_Rect firstSrcRect, int variations) noexcept;
 
 	TextureTile(const TextureTile &textureTile) noexcept = default;
 	TextureTile(TextureTile &&textureTile) noexcept = default;
@@ -89,10 +89,4 @@ class ObsidianTile final : public TextureTile
 {
 public:
 	ObsidianTile(SDL_Point pos, const World &world, const Game &game) noexcept;
-};
-
-class MetalTile final : public TextureTile
-{
-public:
-	MetalTile(SDL_Point pos, const World &world, const Game &game) noexcept;
 };

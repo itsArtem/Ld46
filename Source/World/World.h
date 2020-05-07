@@ -10,7 +10,7 @@
 #include <vector>
 #include <memory>
 #include <functional>
-#include <cstdint>
+#include <thread>
 
 class World final
 {
@@ -37,8 +37,7 @@ public:
 	[[nodiscard]] std::uint32_t getPlayer() const noexcept { return player; }
 	[[nodiscard]] std::uint32_t getChest() const noexcept { return chest; }
 	[[nodiscard]] int getWave() const noexcept { return wave; }
-
-	int getTileCost(std::uint32_t id) const noexcept;
+	[[nodiscard]] int getLevel() const noexcept { return level; }
 
 private:
 	Game &game;
@@ -55,17 +54,16 @@ private:
 	//const float lightFadeDelay = 150.0f;
 	//float lightFadeTimer = lightFadeDelay;
 
+	int level = 1;
 	const int finalLevel = 10;
 	int wave = 0;
 	bool canBuild = false;
 
-	SDL_Point mouse{-1, -1};
+	SDL_Point mouse;
 	std::unordered_map<int, int> costs;
 	SDL_Rect buildBounds{64, 64, game.getWindowSize().x - 64, game.getWindowSize().y - 64};
 	SDL_FRect outlineDstRect{0.0f, 0.0f, static_cast<float>(Tile::Properties::size), static_cast<float>(Tile::Properties::size)};
 	SDL_Rect outlineSrcRect{128, 0, 16, 16};
-
-	bool playedCantPlace = false;
 
 	//void createLightRadius(SDL_Point pos, int radius, int darkness) noexcept;
 

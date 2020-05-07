@@ -1,6 +1,5 @@
 #include "World.h"
 #include "Tile/TextureTile.h"
-#include "Tile/AnimationTile.h"
 #include "../Debug.h"
 #include "Ecs/Component.h"
 #include "../Random.h"
@@ -23,19 +22,20 @@
 World::World(Game &game) noexcept
 	: game{game}
 {
-	load("Resources/Levels/Level" + std::to_string(game.gameSave.level) + ".png");
+	load("Resources/Levels/Level1.png");
 
-	costs.emplace(3, 60);
-	costs.emplace(6, 140);
-	costs.emplace(7, 200);
-	costs.emplace(8, 350);
-	costs.emplace(9, 600);
-	costs.emplace(10, 260);
+	costs.emplace(3, 30);
+	costs.emplace(6, 40);
+	costs.emplace(7, 45);
+	costs.emplace(8, 50);
+	costs.emplace(9, 60);
 }
 
 void World::update() noexcept
 {
 	const float delta = game.getDelta();
+	em.update(delta);
+
 	//lightFadeTimer -= 1000 * delta;
 
 	//if (lightFadeTimer <= 0.0f)
@@ -60,8 +60,6 @@ void World::update() noexcept
 				Mix_PlayChannel(1, game.audioc.getChunk(1), 0);
 			}
 		});
-
-	em.update(delta);
 
 	Entity *playerEntity = em.getEntity(player);
 	Entity *chestEntity = em.getEntity(chest);
@@ -93,12 +91,12 @@ void World::update() noexcept
 					&& !(placement.x == chestPos.x && placement.y == chestPos.y)
 					&& !((placement.x == playerPos.x || placement.x == playerPos.x + 1) && (placement.y == playerPos.y || placement.y == playerPos.y + 1)))
 				{
-					const auto &tile = tiles[placement.x + placement.y * size.x];
+					const int id = tiles[placement.x + placement.y * size.x]->props.commonId;
 
-					if ((pc->tileSelected != tile->props.commonId && pc->points >= costs.at(pc->tileSelected)) || (pc->tileSelected == tile->props.commonId && tile->props.health != tile->props.maxHealth))
+					if (pc->tileSelected != id && pc->points >= costs[pc->tileSelected])
 					{
-						if (costs.find(tile->props.commonId) != costs.end())
-							pc->points += costs.at(tile->props.commonId);
+						if (costs.find(id) != costs.end())
+							pc->points += costs.at(id);
 
 						switch (pc->tileSelected)
 						{
@@ -117,19 +115,11 @@ void World::update() noexcept
 						case 9:
 							tiles[placement.x + placement.y * size.x] = std::make_unique<ObsidianTile>(placement, *this, game);
 							break;
-						case 10:
-							tiles[placement.x + placement.y * size.x] = std::make_unique<MetalTile>(placement, *this, game);
-							break;
 						}
 
 						pc->points -= costs.at(pc->tileSelected);
 						Mix_PlayChannel(5, game.audioc.getChunk(5), 0);
 						Mix_Volume(5, 80);
-					}
-					else if (pc->tileSelected != tile->props.commonId && pc->points < costs.at(pc->tileSelected) && !playedCantPlace)
-					{
-						Mix_PlayChannel(5, game.audioc.getChunk(8), 0);
-						playedCantPlace = true;
 					}
 				}
 				else if (button == SDL_BUTTON_RMASK)
@@ -141,7 +131,7 @@ void World::update() noexcept
 
 					bool removed = false;
 
-					switch (game.gameSave.level)
+					switch (level)
 					{
 					case 1:
 						if (tile->props.commonId != 0)
@@ -218,7 +208,7 @@ void World::update() noexcept
 						{
 							tile = std::make_unique<GrassTile>(placement, *this, game);
 							removed = true;
-							LOG_ERROR(SDL_LOG_CATEGORY_APPLICATION, std::string{"Tile replacement not set for level " + std::to_string(game.gameSave.level) + "."}.c_str());
+							LOG_ERROR(SDL_LOG_CATEGORY_APPLICATION, std::string{"Tile replacement not set for level " + std::to_string(level) + "."}.c_str());
 						}
 						break;
 					}
@@ -229,8 +219,6 @@ void World::update() noexcept
 						Mix_Volume(6, 80);
 					}
 				}
-				else if (button != SDL_BUTTON_LMASK)
-					playedCantPlace = false;
 			}
 			else
 				canBuild = false;
@@ -345,14 +333,6 @@ bool World::isInside(SDL_Point pos) const noexcept
 	return pos.x >= 0 && pos.x < size.x &&pos.y >= 0 && pos.y < size.y;
 }
 
-int World::getTileCost(std::uint32_t id) const noexcept
-{
-	if (costs.find(id) != costs.end())
-		return costs.at(id);
-
-	return 0;
-}
-
 void World::forAllVisibleTiles(std::function<void(Tile &tile)> func) const noexcept
 {
 	const SDL_Rect view{getView()};
@@ -450,10 +430,6 @@ void World::load(const std::string &path)
 				tiles.emplace_back(std::make_unique<StoneBrickTile>(SDL_Point{x, y}, *this, game));
 				break;
 
-			case 0x081C8E:
-				tiles.emplace_back(std::make_unique<WaterTile>(SDL_Point{x, y}, *this, game));
-				break;
-
 			default:
 				LOG_ERROR(SDL_LOG_CATEGORY_APPLICATION, "Unknown tile hex!");
 				break;
@@ -480,7 +456,7 @@ void World::progress() noexcept
 {
 	if (wave == finalWave)
 	{
-		if (game.gameSave.level == finalLevel)
+		if (level == finalLevel)
 		{
 			game.gsm.add(std::make_unique<WinMenuState>(game, em.getEntity(getPlayer())->getComponent<PlayerComponent>()->score));
 			return;
@@ -488,16 +464,15 @@ void World::progress() noexcept
 		else
 			game.gsm.add(std::make_unique<LevelPassMenuState>(game, em.getEntity(getPlayer())->getComponent<PlayerComponent>()->score));
 
-		++game.gameSave.level;
+		++level;
 		wave = 0;
 
-		load("Resources/Levels/Level" + std::to_string(game.gameSave.level) + ".png");
-		game.gameSave.save();
+		load("Resources/Levels/Level" + std::to_string(level) + ".png");
 	}
 	else
 		++wave;
 
-	const int enemyCount = 6 + (3 * wave);
+	const int enemyCount = 5 + (2 * wave);
 	std::vector<SDL_Point> positions;
 	positions.reserve(enemyCount);
 
@@ -541,33 +516,24 @@ void World::progress() noexcept
 
 void World::spawnRandomHostile(SDL_FPoint pos) noexcept
 {
-	const int type = getRandomInt(0, 7);
+	const int type = getRandomInt(0, 3);
 
 	switch (type)
 	{
 	case 0:
 		createSlime(em, pos, SingleAxisAnimationComponent::Direction::neg, *this, game);
 		break;
+
 	case 1:
-		createArcher(em, pos, DirectionalAnimationComponent::Direction::up, *this, game);
+		createArcher(em, pos, DirectionalAnimationComponent::Direction::up, *this, game, static_cast<Projectile>(getRandomInt(0, 2)));
 		break;
+
 	case 2:
-		createDarkLord(em, pos, DirectionalAnimationComponent::Direction::up, *this, game, static_cast<Projectile>(getRandomInt(0, 3)));
+		createDarkLord(em, pos, DirectionalAnimationComponent::Direction::up, *this, game, static_cast<Projectile>(getRandomInt(0, 2)));
 		break;
+
 	case 3:
 		createGoblin(em, pos, DirectionalAnimationComponent::Direction::up, *this, game);
-		break;
-	case 4:
-		createIceDemon(em, pos, DirectionalAnimationComponent::Direction::up, *this, game);
-		break;
-	case 5:
-		createZombie(em, pos, DirectionalAnimationComponent::Direction::up, *this, game);
-		break;
-	case 6:
-		createKnight(em, pos, DirectionalAnimationComponent::Direction::up, *this, game);
-		break;
-	case 7:
-		createLootLord(em, pos, DirectionalAnimationComponent::Direction::up, *this, game);
 		break;
 	}
 }

@@ -85,16 +85,6 @@ void AudioCache::clearMusic() noexcept
 	music.clear();
 }
 
-std::size_t AudioCache::getChunkCount() const noexcept
-{
-	return chunks.size();
-}
-
-std::size_t AudioCache::getMusicCount() const noexcept
-{
-	return music.size();
-}
-
 void AudioCache::moveData(AudioCache &audioc) noexcept
 {
 	chunks = std::move(audioc.chunks);

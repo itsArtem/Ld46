@@ -132,18 +132,6 @@
     <ClCompile Include="Source\GameStates\LevelPassMenuState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Files\GameSave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Files\Config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Files\File.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameStates\OptionsMenuState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Debug.h">
@@ -275,18 +263,6 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Files\GameSave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Files\Config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Files\File.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameStates\OptionsMenuState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\TileSheet.png">
@@ -361,34 +337,16 @@
     <Image Include="Resources\Docs\Screenshot 6 Final.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\Docs\Cover2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\Docs\Screenshot 8 Final.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\Docs\Screenshot 9 Final.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Icon.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Save.dat" />
-    <None Include="Resource.aps" />
-    <None Include="README.md" />
-    <None Include="LICENSE.md" />
-    <None Include="Resources\Save\Game.sav" />
-    <None Include="Resources\Save\Config.dat" />
     <None Include="Resources\Audio\Music\Track1.mid" />
     <None Include="Resources\Audio\Music\Track2.mid" />
     <None Include="Resources\Audio\Music\Track3.mid" />
     <None Include="Resources\Audio\Music\Track4.mid" />
-    <None Include="Resources\Audio\Music\Track8.mid" />
-    <None Include="Resources\Audio\Music\Track6.mid" />
-    <None Include="Resources\Audio\Music\Track7.mid" />
-    <None Include="Resources\Audio\Music\Track5.mid" />
+    <None Include="Resource.aps" />
+    <None Include="README.md" />
+    <None Include="LICENSE.md" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Fonts\Font.ttf" />
@@ -419,9 +377,6 @@
       <Filter>Resource Files</Filter>
     </Media>
     <Media Include="Resources\Audio\Chunks\Place.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
-    <Media Include="Resources\Audio\Chunks\CantPlace.wav">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>

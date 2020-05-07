@@ -28,8 +28,3 @@ void GuiCanvas::render(SDL_Renderer *rdr) const noexcept
 	for (const auto &e : elements)
 		e->render(rdr);
 }
-
-std::size_t GuiCanvas::getSize() const noexcept
-{
-	return elements.size();
-}

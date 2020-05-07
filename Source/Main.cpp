@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 		Game{}.run();
 	}
 #endif
-	
+
 	SDL_Quit();
 	IMG_Quit();
 	Mix_CloseAudio();

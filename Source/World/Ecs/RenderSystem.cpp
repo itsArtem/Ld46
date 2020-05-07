@@ -21,7 +21,11 @@ void RenderSystem::update(Entity &e, float delta) const noexcept
 	ProjectileComponent *const pjc = e.getComponent<ProjectileComponent>();
 
 	if (pjc)
+	{
 		pjc->timer -= 1 * delta;
+		if (pjc->timer <= 0.0f)
+			pjc->alpha -= 80 * delta;
+	}
 
 	if (!dac && !saac || !vc) return;
 

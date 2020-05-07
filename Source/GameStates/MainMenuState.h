@@ -16,6 +16,6 @@ public:
 
 private:
 	Game &game;
-	Text title, info, version;
+	Text title, info;
 	GuiCanvas canvas;
 };

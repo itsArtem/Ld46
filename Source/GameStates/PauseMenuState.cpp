@@ -1,11 +1,8 @@
 #include "PauseMenuState.h"
 #include "../Game.h"
 #include "../Graphics/Gui/TextButton.h"
-#include "OptionsMenuState.h"
 
 #include <SDL_render.h>
-
-#include <memory>
 
 PauseMenuState::PauseMenuState(Game &game)
 	: game{game},
@@ -28,9 +25,8 @@ PauseMenuState::PauseMenuState(Game &game)
 	info.dstRect.x = game.getWindowSize().x - 600.0f;
 	info.dstRect.y = 220.0f;
 
-	canvas.add(std::make_unique<TextButton>(SDL_Point{200, 252}, game, TextButton::Properties{Text{game.fontc.get(1), "Resume", {255, 255, 255, 255}, true, game.getRenderer()}, ButtonHoverEffect::enlarge}));
-	canvas.add(std::make_unique<TextButton>(SDL_Point{200, 302}, game, TextButton::Properties{Text{game.fontc.get(1), "Options", {255, 255, 255, 255}, true, game.getRenderer()}, ButtonHoverEffect::enlarge}));
-	canvas.add(std::make_unique<TextButton>(SDL_Point{200, 352}, game, TextButton::Properties{Text{game.fontc.get(1), "Main Menu", {255, 255, 255, 255}, true, game.getRenderer()}, ButtonHoverEffect::enlarge}));
+	canvas.add(std::make_unique<TextButton>(SDL_Point{200, 275}, game, TextButton::Properties{Text{game.fontc.get(1), "Continue", {255, 255, 255, 255}, true, game.getRenderer()}, ButtonHoverEffect::enlarge}));
+	canvas.add(std::make_unique<TextButton>(SDL_Point{200, 325}, game, TextButton::Properties{Text{game.fontc.get(1), "Main Menu", {255, 255, 255, 255}, true, game.getRenderer()}, ButtonHoverEffect::enlarge}));
 }
 
 void PauseMenuState::update() noexcept
@@ -46,9 +42,6 @@ void PauseMenuState::update() noexcept
 	}
 
 	if (canvas.get(1).isReleased())
-		game.gsm.add(std::make_unique<OptionsMenuState>(game));
-
-	if (canvas.get(2).isReleased())
 		game.toMainMenu();
 }
 

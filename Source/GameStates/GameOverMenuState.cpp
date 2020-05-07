@@ -17,7 +17,7 @@ GameOverMenuState::GameOverMenuState(Game &game, int finalScore)
 	title.dstRect.y = 50;
 
 	info.setWrappedText(game.fontc.get(1),
-		"F, You Lost!\n"
+		"F! You Lost!\n"
 		"Awww!\n"
 		"\n"
 		"Final score: " + std::to_string(finalScore),
@@ -25,7 +25,7 @@ GameOverMenuState::GameOverMenuState(Game &game, int finalScore)
 		480,
 		game.getRenderer());
 
-	info.dstRect.w = 510.0f;
+	info.dstRect.w = 520.0f;
 	info.dstRect.h = 120.0f;
 	info.dstRect.x = game.getWindowSize().x - 600.0f;
 	info.dstRect.y = 245.0f;
