@@ -1,25 +1,40 @@
-﻿  AboutMenuState.cpp
+﻿  AudioCache.cpp
+  Config.cpp
+  File.cpp
+  GameSave.cpp
+  Game.cpp
+  AboutMenuState.cpp
   GameOverMenuState.cpp
   GameplayState.cpp
   LevelPassMenuState.cpp
   MainMenuState.cpp
   OptionsMenuState.cpp
+  PauseMenuState.cpp
   ShopState.cpp
   WinMenuState.cpp
+  Gui.cpp
+  GuiCanvas.cpp
   TextButton.cpp
   HealthBar.cpp
+  HudManager.cpp
   Info.cpp
+  Generating Code...
+  Compiling...
+  MessageOutput.cpp
+  Main.cpp
   AttackSystem.cpp
   CameraSystem.cpp
+  Component.cpp
+  Entity.cpp
   EntityManager.cpp
+  HealthSystem.cpp
   HostileSystem.cpp
   MovementSystem.cpp
   RenderSystem.cpp
   AnimationTile.cpp
   TextureTile.cpp
   Tile.cpp
-  Generating Code...
-  Compiling...
   World.cpp
   Generating Code...
+  LINK : C:\Users\Its_a\Development\Repos\Ld46\Output\Win32\Debug\Ld46.exe not found or not built by the last incremental link; performing full link
   Ld46.vcxproj -> C:\Users\Its_a\Development\Repos\Ld46\Output\Win32\Debug\Ld46.exe

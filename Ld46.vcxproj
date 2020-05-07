@@ -264,7 +264,15 @@
   <ItemGroup>
     <Image Include="Resources\Docs\Cover.png" />
     <Image Include="Resources\Docs\Cover2.png" />
+    <Image Include="Resources\Docs\Cover3.png" />
     <Image Include="Resources\Docs\Screenshot 1.png" />
+    <Image Include="Resources\Docs\Screenshot 10 Post-Compo.png" />
+    <Image Include="Resources\Docs\Screenshot 11 Post-Compo.png" />
+    <Image Include="Resources\Docs\Screenshot 12 Post-Compo.png" />
+    <Image Include="Resources\Docs\Screenshot 13 Post-Compo.png" />
+    <Image Include="Resources\Docs\Screenshot 14 Post-Compo.png" />
+    <Image Include="Resources\Docs\Screenshot 15 Post-Compo.png" />
+    <Image Include="Resources\Docs\Screenshot 16 Post-Compo.png" />
     <Image Include="Resources\Docs\Screenshot 2.png" />
     <Image Include="Resources\Docs\Screenshot 3 Final.png" />
     <Image Include="Resources\Docs\Screenshot 4 Final.png" />
@@ -303,6 +311,7 @@
     <None Include="Resources\Audio\Music\Track6.mid" />
     <None Include="Resources\Audio\Music\Track7.mid" />
     <None Include="Resources\Audio\Music\Track8.mid" />
+    <None Include="Resources\Docs\Cover3.pdn" />
     <None Include="Resources\Save.dat" />
     <None Include="Resources\Save\Config.dat" />
     <None Include="Resources\Save\Game.sav" />

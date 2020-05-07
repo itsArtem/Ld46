@@ -373,6 +373,30 @@
     <Image Include="Resources\Textures\Icon.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Docs\Cover3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 10 Post-Compo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 11 Post-Compo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 12 Post-Compo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 13 Post-Compo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 14 Post-Compo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 15 Post-Compo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Docs\Screenshot 16 Post-Compo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Save.dat" />
@@ -389,6 +413,7 @@
     <None Include="Resources\Audio\Music\Track6.mid" />
     <None Include="Resources\Audio\Music\Track7.mid" />
     <None Include="Resources\Audio\Music\Track5.mid" />
+    <None Include="Resources\Docs\Cover3.pdn" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Fonts\Font.ttf" />
