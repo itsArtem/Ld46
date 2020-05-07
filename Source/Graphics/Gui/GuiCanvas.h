@@ -19,6 +19,8 @@ public:
 	void update() noexcept;
 	void render(SDL_Renderer *rdr) const noexcept;
 
+	std::size_t getSize() const noexcept;
+
 private:
 	std::vector<std::unique_ptr<Gui>> elements;
 };

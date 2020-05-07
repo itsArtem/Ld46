@@ -31,6 +31,9 @@ public:
 	void removeMusic(std::size_t index) noexcept;
 	void clearMusic() noexcept;
 
+	std::size_t getChunkCount() const noexcept;
+	std::size_t getMusicCount() const noexcept;
+
 private:
 	std::vector<Mix_Chunk *> chunks;
 	std::vector<Mix_Music *> music;

@@ -6,8 +6,8 @@
 
 #include <functional>
 
-TextureTile::TextureTile(Properties props, const World &world, SDL_Texture *ss, SDL_Rect firstSrcRect, int variations) noexcept
-	: Tile{props, world},
+TextureTile::TextureTile(Properties props, const World &world, const Game &game, SDL_Texture *ss, SDL_Rect firstSrcRect, int variations) noexcept
+	: Tile{props, world, game},
 	world{world},
 	ss{ss},
 	firstSrc{firstSrcRect.x, firstSrcRect.y},
@@ -19,7 +19,9 @@ void TextureTile::render(SDL_Renderer *rdr) const noexcept
 {
 	SDL_SetTextureColorMod(ss, 255, 255, 255);
 	SDL_RenderCopyF(rdr, ss, &srcRect, getDstRect());
-
+	renderTransition(rdr, ss, {firstSrc.x + 16, firstSrc.y, srcRect.w, srcRect.h});
+	Tile::render(rdr);
+	/*
 	std::function<bool(SDL_Point)> isConnected = [&world = world, props = props](SDL_Point pos)
 	{
 		if (!world.isInside(pos))
@@ -139,54 +141,60 @@ void TextureTile::render(SDL_Renderer *rdr) const noexcept
 		const SDL_Rect transSrcRect{firstSrc.x + srcRect.w * 7, firstSrc.y + srcRect.h, srcRect.w, srcRect.h};
 		SDL_RenderCopyF(rdr, ss, &transSrcRect, getDstRect());
 	}
+	*/
 }
 
 GrassTile::GrassTile(SDL_Point pos, const World &world, const Game &game) noexcept
-	: TextureTile{{0, pos, false, true, 0}, world, game.texc.get(0), {0, 0, 16, 16}, 3}
+	: TextureTile{{0, pos, false, true, 0}, world, game, game.texc.get(0), {0, 0, 16, 16}, 3}
 {
 }
 
 DirtTile::DirtTile(SDL_Point pos, const World &world, const Game &game) noexcept
-	: TextureTile{{1, pos, false, true, 0}, world, game.texc.get(0), {128, 0, 16, 16}, 3}
+	: TextureTile{{1, pos, false, true, 0}, world, game, game.texc.get(0), {128, 0, 16, 16}, 3}
 {
 }
 
 StoneTile::StoneTile(SDL_Point pos, const World &world, const Game &game) noexcept
-	: TextureTile{{2, pos, true, false, 0}, world, game.texc.get(0), {0, 48, 16, 16}, 3}
+	: TextureTile{{2, pos, true, false, 0}, world, game, game.texc.get(0), {0, 48, 16, 16}, 3}
 {
 }
 
 WoodTile::WoodTile(SDL_Point pos, const World &world, const Game &game) noexcept
-	: TextureTile{{3, pos, true, true, 200}, world, game.texc.get(0), {128, 48, 16, 16}, 1}
+	: TextureTile{{3, pos, true, true, 150}, world, game, game.texc.get(0), {128, 48, 16, 16}, 1}
 {
 }
 
 SnowTile::SnowTile(SDL_Point pos, const World &world, const Game &game) noexcept
-	: TextureTile{{4, pos, false, true, 0}, world, game.texc.get(0), {0, 144, 16, 16}, 3}
+	: TextureTile{{4, pos, false, true, 0}, world, game, game.texc.get(0), {0, 144, 16, 16}, 3}
 {
 }
 
 SandTile::SandTile(SDL_Point pos, const World &world, const Game &game) noexcept
-	: TextureTile{{5, pos, false, true, 0}, world, game.texc.get(0), {128, 144, 16, 16}, 3}
+	: TextureTile{{5, pos, false, true, 0}, world, game, game.texc.get(0), {128, 144, 16, 16}, 3}
 {
 }
 
 StoneBrickTile::StoneBrickTile(SDL_Point pos, const World &world, const Game &game) noexcept
-	: TextureTile{{6, pos, true, true, 250}, world, game.texc.get(0), {0, 192, 16, 16}, 1}
+	: TextureTile{{6, pos, true, true, 200}, world, game, game.texc.get(0), {0, 192, 16, 16}, 1}
 {
 }
 
 BrickTile::BrickTile(SDL_Point pos, const World &world, const Game &game) noexcept
-	: TextureTile{{7, pos, true, true, 300}, world, game.texc.get(0), {0, 96, 16, 16}, 1}
+	: TextureTile{{7, pos, true, true, 250}, world, game, game.texc.get(0), {0, 96, 16, 16}, 1}
 {
 }
 
 IronTile::IronTile(SDL_Point pos, const World &world, const Game &game) noexcept
-	: TextureTile{{8, pos, true, true, 350}, world, game.texc.get(0), {128, 96, 16, 16}, 1}
+	: TextureTile{{8, pos, true, true, 300}, world, game, game.texc.get(0), {128, 96, 16, 16}, 1}
 {
 }
 
 ObsidianTile::ObsidianTile(SDL_Point pos, const World &world, const Game &game) noexcept
-	: TextureTile{{9, pos, true, true, 450}, world, game.texc.get(0), {0, 240, 16, 16}, 1}
+	: TextureTile{{9, pos, true, true, 450}, world, game, game.texc.get(0), {0, 240, 16, 16}, 1}
+{
+}
+
+MetalTile::MetalTile(SDL_Point pos, const World &world, const Game &game) noexcept
+	: TextureTile{{10, pos, true, true, 250}, world, game, game.texc.get(0), {128, 192, 16, 16}, 3}
 {
 }

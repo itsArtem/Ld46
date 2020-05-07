@@ -12,7 +12,6 @@
 #include <functional>
 #include <cstdint>
 #include <cmath>
-#include <iostream>
 
 MovementSystem::MovementSystem(EntityManager &em)
 	: em{em}
@@ -284,7 +283,8 @@ void MovementSystem::update(Entity &e, float delta) const noexcept
 		{
 			if (vc->velocity.x < 0.0f)
 			{
-				if (std::floor((tfc->tf.x + cc->bounds.x + vc->velocity.x * delta) / Tile::Properties::size) >= 0.0f
+				if ((pjc && pjc->friendly) 
+					|| std::floor((tfc->tf.x + cc->bounds.x + vc->velocity.x * delta) / Tile::Properties::size) >= 0.0f
 					&& !hasCollision({cc->bounds.x + vc->velocity.x * delta, cc->bounds.y + cc->bounds.h / 3.0f})
 					&& !hasCollision({cc->bounds.x + vc->velocity.x * delta, static_cast<float>(cc->bounds.y + cc->bounds.h)}))
 				{
@@ -295,7 +295,8 @@ void MovementSystem::update(Entity &e, float delta) const noexcept
 			}
 			else if (vc->velocity.x > 0.0f)
 			{
-				if (std::floor((tfc->tf.x + cc->bounds.x + cc->bounds.w + vc->velocity.x * delta) / Tile::Properties::size) < cc->world.size.x
+				if ((pjc && pjc->friendly) 
+					|| std::floor((tfc->tf.x + cc->bounds.x + cc->bounds.w + vc->velocity.x * delta) / Tile::Properties::size) < cc->world.size.x
 					&& !hasCollision({cc->bounds.x + cc->bounds.w + vc->velocity.x * delta, cc->bounds.y + cc->bounds.h / 3.0f})
 					&& !hasCollision({cc->bounds.x + cc->bounds.w + vc->velocity.x * delta, static_cast<float>(cc->bounds.y + cc->bounds.h)}))
 				{
@@ -310,7 +311,8 @@ void MovementSystem::update(Entity &e, float delta) const noexcept
 		{
 			if (vc->velocity.y < 0.0f)
 			{
-				if (std::floor((tfc->tf.y + cc->bounds.y + vc->velocity.y * delta) / Tile::Properties::size) >= 0.0f
+				if ((pjc && pjc->friendly) 
+					|| std::floor((tfc->tf.y + cc->bounds.y + vc->velocity.y * delta) / Tile::Properties::size) >= 0.0f
 					&& !hasCollision({static_cast<float>(cc->bounds.x), cc->bounds.y + cc->bounds.h / 3 + vc->velocity.y * delta})
 					&& !hasCollision({cc->bounds.x + cc->bounds.w / 2.0f, cc->bounds.y + cc->bounds.h / 3 + vc->velocity.y * delta})
 					&& !hasCollision({static_cast<float>(cc->bounds.x + cc->bounds.w), cc->bounds.y + cc->bounds.h / 3 + vc->velocity.y * delta}))
@@ -323,7 +325,8 @@ void MovementSystem::update(Entity &e, float delta) const noexcept
 			}
 			else if (vc->velocity.y > 0.0f)
 			{
-				if (std::floor((tfc->tf.y + cc->bounds.y + cc->bounds.h + vc->velocity.y * delta) / Tile::Properties::size) < cc->world.size.y
+				if ((pjc && pjc->friendly) 
+					|| std::floor((tfc->tf.y + cc->bounds.y + cc->bounds.h + vc->velocity.y * delta) / Tile::Properties::size) < cc->world.size.y
 					&& !hasCollision({static_cast<float>(cc->bounds.x), cc->bounds.y + cc->bounds.h + vc->velocity.y * delta})
 					&& !hasCollision({cc->bounds.x + cc->bounds.w / 2.0f, cc->bounds.y + cc->bounds.h + vc->velocity.y * delta})
 					&& !hasCollision({static_cast<float>(cc->bounds.x + cc->bounds.w), cc->bounds.y + cc->bounds.h + vc->velocity.y * delta}))

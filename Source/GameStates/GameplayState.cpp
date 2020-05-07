@@ -1,6 +1,8 @@
 #include "GameplayState.h"
 #include "../Game.h"
 #include "../Graphics/Gui/TextureButton.h"
+#include "../Graphics/Gui/TextButton.h"
+#include "../Graphics/Gui/ButtonHoverEffect.h"
 #include "ShopState.h"
 #include "../World/Ecs/Entity.h"
 #include "../World/Ecs/EntityManager.h"
@@ -15,22 +17,32 @@ GameplayState::GameplayState(Game &game) noexcept
 	hudm{game, world}
 {
 	canvas.add(std::make_unique<TextureButton>(SDL_Rect{game.getWindowSize().x - 86, game.getWindowSize().y - 78, 64, 64}, game, TextureButton::Visuals{game.texc.get(2), SDL_Rect{32, 16, 16, 16}, SDL_Rect{48, 16, 16, 16}, SDL_Rect{64, 16, 16, 16}}));
+	canvas.add(std::make_unique<TextButton>(SDL_Point{game.getWindowSize().x - 248, game.getWindowSize().y - 80}, game, TextButton::Properties{Text{game.fontc.get(0), "Begin Wave", SDL_Colour{255, 100, 100, 255}, true, game.getRenderer()}, ButtonHoverEffect::dim}));
 }
 
 void GameplayState::update() noexcept
 {
-	const Entity *const player = world.em.getEntity(world.getPlayer());
+	hideUi = false;
+	Entity *const player = world.em.getEntity(world.getPlayer());
+	PlayerComponent *const pc = player->getComponent<PlayerComponent>();
 
-	if (player && player->getComponent<PlayerComponent>()->preparation)
+	if (player && pc->preparation)
 	{
 		canvas.get(0).tf.x = game.getWindowSize().x - 86;
 		canvas.get(0).tf.y = game.getWindowSize().y - 78;
 
+		canvas.get(1).tf.x = game.getWindowSize().x - 248;
+		canvas.get(1).tf.y = game.getWindowSize().y - 80;
+		
 		if (canvas.get(0).isReleased())
 		{
 			game.gsm.add(std::make_unique<ShopState>(game, game.gsm, world));
 			game.gsm.renderPrevious(true);
+			hideUi = true;
 		}
+
+		if (canvas.get(1).isReleased())
+			pc->prepareTimer = 0;
 
 		canvas.update();
 	}
@@ -88,10 +100,14 @@ void GameplayState::update() noexcept
 void GameplayState::render() const noexcept
 {
 	world.render();
-	hudm.render();
 
-	const Entity *const player = world.em.getEntity(world.getPlayer());
+	if (!hideUi)
+	{
+		hudm.render();
 
-	if (player && player->getComponent<PlayerComponent>()->preparation)
-		canvas.render(game.getRenderer());
+		const Entity *const player = world.em.getEntity(world.getPlayer());
+
+		if (player && player->getComponent<PlayerComponent>()->preparation)
+			canvas.render(game.getRenderer());
+	}
 }

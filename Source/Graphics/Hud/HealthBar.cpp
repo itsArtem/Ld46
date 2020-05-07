@@ -22,7 +22,7 @@ void HealthBar::update() noexcept
 		const HealthComponent *const chc = world.em.getEntity(world.getChest())->getComponent<HealthComponent>();
 		const float chestSize = (chc->health / chc->maxHealth) * (chestBarDst.w - 22);
 
-		chestIconDst.x = game.getWindowSize().x - 56;
+		chestIconDst.x = game.getWindowSize().x - 52;
 		chestBarDst.x = chestIconDst.x - chestBarDst.w + 14;
 		chestHealthMetre.x = (chestBarDst.x + 11);
 		chestHealthMetre.w = static_cast<int>(chestSize);

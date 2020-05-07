@@ -19,6 +19,7 @@ private:
 	Game &game;
 	HudManager hudm;
 	GuiCanvas canvas;
+	bool hideUi = false;
 
 	World world;
 
