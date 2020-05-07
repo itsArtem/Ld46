@@ -47,7 +47,7 @@ void Info::update() noexcept
 	}
 
 	wave.setText(game.fontc.get(0), "Wave " + std::to_string(world.getWave()) + "/" + std::to_string(world.finalWave), {255, 255, 255, 255}, true, game.getRenderer());
-	level.setText(game.fontc.get(0), "Level " + std::to_string(world.getLevel()), {255, 255, 255, 255}, true, game.getRenderer());
+	level.setText(game.fontc.get(0), "Level " + std::to_string(game.gameSave.level), {255, 255, 255, 255}, true, game.getRenderer());
 }
 
 void Info::render() const noexcept

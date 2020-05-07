@@ -11,7 +11,6 @@
 
 #include <cstdint>
 #include <cmath>
-#include <iostream>
 
 void AttackSystem::update(Entity &e, float delta) noexcept
 {
@@ -27,7 +26,7 @@ void AttackSystem::update(Entity &e, float delta) noexcept
 
 		if (button == SDL_BUTTON_LMASK && pc->attackTimer <= 0.0f)
 		{
-			const float speed = 400.0f;
+			const float speed = 450.0f;
 			const SDL_FPoint start{tfc->tf.x + tfc->tf.w / 2 - 18, tfc->tf.y + tfc->tf.h / 2 - 18};
 
 			const double angle = std::atan2(mouse.y + static_cast<double>(pc->world.camera.y) - start.y,
@@ -70,8 +69,8 @@ void AttackSystem::update(Entity &e, float delta) noexcept
 								PlayerComponent *const pc = player->getComponent<PlayerComponent>();
 								if (pc)
 								{
-									pc->points += 10;
-									pc->score += 10;
+									pc->points += 20;
+									pc->score += 20;
 
 									Mix_PlayChannel(2, pc->game.audioc.getChunk(2), 0);
 								}

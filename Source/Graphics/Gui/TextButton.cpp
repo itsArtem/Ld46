@@ -1,7 +1,6 @@
 #include "TextButton.h"
 
 #include <utility>
-#include <iostream>
 
 TextButton::Properties::Properties(Text &&text, ButtonHoverEffect hoverEffect) noexcept
 	: text{std::move(text)},
@@ -13,6 +12,9 @@ TextButton::TextButton(SDL_Point pos, const Game &game, Properties &&props) noex
 	: Gui{{pos.x, pos.y, 0, 0}, game},
 	props{std::move(props)}
 {
+	props.text.dstRect.x = static_cast<float>(pos.x);
+	props.text.dstRect.y = static_cast<float>(pos.y);
+
 	tf.w = static_cast<int>(props.text.dstRect.w);
 	tf.h = static_cast<int>(props.text.dstRect.h);
 }
@@ -20,7 +22,7 @@ TextButton::TextButton(SDL_Point pos, const Game &game, Properties &&props) noex
 void TextButton::update() noexcept
 {
 	Gui::update();
-
+	
 	if (props.hoverEffect != ButtonHoverEffect::none)
 		switch (props.hoverEffect)
 		{
@@ -59,10 +61,18 @@ void TextButton::update() noexcept
 	}
 	else if (props.hoverEffect != ButtonHoverEffect::dim)
 		props.text.colourMod = normalColour;
+
+	if (!isHoveredOver())
+		normalTextTf = {static_cast<float>(tf.x), static_cast<float>(tf.y), props.text.dstRect.w, props.text.dstRect.h};
+
+	if (props.hoverEffect != ButtonHoverEffect::enlarge)
+	{
+		props.text.dstRect.x = static_cast<float>(tf.x);
+		props.text.dstRect.y = static_cast<float>(tf.y);
+	}
 }
 
 void TextButton::render(SDL_Renderer *rdr) const noexcept
 {
-	SDL_RenderDrawRect(rdr, &tf);
 	props.text.render(rdr, Text::Shadow::right);
 }

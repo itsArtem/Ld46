@@ -131,10 +131,10 @@ struct PlayerComponent final : public Component
 	World &world;
 	Game &game;
 
-	float attackDelay = 400.0f;
+	float attackDelay = 450.0f;
 	float attackTimer = attackDelay;
 	
-	int points = 400;
+	int points = 500;
 	int score = 0;
 	bool preparation = true;
 	const float prepareTime = 60.0f;
@@ -189,14 +189,10 @@ struct ProjectileComponent final : public Component
 {
 	const bool friendly;
 	float damage;
-
 	float timer = 20.0f;
-	float alpha = 255.0f;
-
 	bool stop = false;
 	EntityManager &em;
 	bool hit = false;
-
 	const Game &game;
 
 	ProjectileComponent(bool friendly, float damage, EntityManager &em, const Game &game) noexcept;

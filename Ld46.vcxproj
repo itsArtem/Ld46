@@ -169,6 +169,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AudioCache.cpp" />
+    <ClCompile Include="Source\Files\Config.cpp" />
+    <ClCompile Include="Source\Files\File.cpp" />
+    <ClCompile Include="Source\Files\GameSave.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\GameStates\AboutMenuState.cpp" />
     <ClCompile Include="Source\GameStates\GameOverMenuState.cpp" />
@@ -176,6 +179,7 @@
     <ClCompile Include="Source\GameStates\GameStateManager.cpp" />
     <ClCompile Include="Source\GameStates\LevelPassMenuState.cpp" />
     <ClCompile Include="Source\GameStates\MainMenuState.cpp" />
+    <ClCompile Include="Source\GameStates\OptionsMenuState.cpp" />
     <ClCompile Include="Source\GameStates\PauseMenuState.cpp" />
     <ClCompile Include="Source\GameStates\ShopState.cpp" />
     <ClCompile Include="Source\GameStates\WinMenuState.cpp" />
@@ -212,6 +216,9 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\AudioCache.h" />
     <ClInclude Include="Source\Debug.h" />
+    <ClInclude Include="Source\Files\Config.h" />
+    <ClInclude Include="Source\Files\File.h" />
+    <ClInclude Include="Source\Files\GameSave.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\GameStates\AboutMenuState.h" />
     <ClInclude Include="Source\GameStates\GameOverMenuState.h" />
@@ -220,6 +227,7 @@
     <ClInclude Include="Source\GameStates\GameStateManager.h" />
     <ClInclude Include="Source\GameStates\LevelPassMenuState.h" />
     <ClInclude Include="Source\GameStates\MainMenuState.h" />
+    <ClInclude Include="Source\GameStates\OptionsMenuState.h" />
     <ClInclude Include="Source\GameStates\PauseMenuState.h" />
     <ClInclude Include="Source\GameStates\ShopState.h" />
     <ClInclude Include="Source\GameStates\WinMenuState.h" />
@@ -255,6 +263,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Docs\Cover.png" />
+    <Image Include="Resources\Docs\Cover2.png" />
     <Image Include="Resources\Docs\Screenshot 1.png" />
     <Image Include="Resources\Docs\Screenshot 2.png" />
     <Image Include="Resources\Docs\Screenshot 3 Final.png" />
@@ -262,6 +271,8 @@
     <Image Include="Resources\Docs\Screenshot 5 Final.png" />
     <Image Include="Resources\Docs\Screenshot 6 Final.png" />
     <Image Include="Resources\Docs\Screenshot 7 final.png" />
+    <Image Include="Resources\Docs\Screenshot 8 Final.png" />
+    <Image Include="Resources\Docs\Screenshot 9 Final.png" />
     <Image Include="Resources\Docs\Screenshot1.png" />
     <Image Include="Resources\Docs\Screenshot2.png" />
     <Image Include="Resources\Levels\Level1.png" />
@@ -276,6 +287,7 @@
     <Image Include="Resources\Levels\Level9.png" />
     <Image Include="Resources\Textures\EntitySheet.png" />
     <Image Include="Resources\Textures\Icon.ico" />
+    <Image Include="Resources\Textures\Icon.png" />
     <Image Include="Resources\Textures\TileSheet.png" />
     <Image Include="Resources\Textures\UiSheet.png" />
   </ItemGroup>
@@ -287,7 +299,13 @@
     <None Include="Resources\Audio\Music\Track2.mid" />
     <None Include="Resources\Audio\Music\Track3.mid" />
     <None Include="Resources\Audio\Music\Track4.mid" />
+    <None Include="Resources\Audio\Music\Track5.mid" />
+    <None Include="Resources\Audio\Music\Track6.mid" />
+    <None Include="Resources\Audio\Music\Track7.mid" />
+    <None Include="Resources\Audio\Music\Track8.mid" />
     <None Include="Resources\Save.dat" />
+    <None Include="Resources\Save\Config.dat" />
+    <None Include="Resources\Save\Game.sav" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Fonts\Font.ttf" />
@@ -298,6 +316,7 @@
   <ItemGroup>
     <Media Include="Resources\Audio\Chunks\Attack.wav" />
     <Media Include="Resources\Audio\Chunks\Break.wav" />
+    <Media Include="Resources\Audio\Chunks\CantPlace.wav" />
     <Media Include="Resources\Audio\Chunks\Hit.wav" />
     <Media Include="Resources\Audio\Chunks\Hostile.wav" />
     <Media Include="Resources\Audio\Chunks\Hurt.wav" />

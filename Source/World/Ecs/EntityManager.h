@@ -48,8 +48,12 @@ private:
 
 std::uint32_t createPlayer(EntityManager &em, SDL_FPoint pos,  DirectionalAnimationComponent::Direction dir, World &world, Game &game) noexcept;
 std::uint32_t createSlime(EntityManager &em, SDL_FPoint pos,  SingleAxisAnimationComponent::Direction dir, World &world, const Game &game) noexcept;
-std::uint32_t createArcher(EntityManager &em, SDL_FPoint pos,  DirectionalAnimationComponent::Direction dir, World &world, const Game &game, Projectile projectile) noexcept;
+std::uint32_t createArcher(EntityManager &em, SDL_FPoint pos,  DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept;
 std::uint32_t createDarkLord(EntityManager &em, SDL_FPoint pos,  DirectionalAnimationComponent::Direction dir, World &world, const Game &game, Projectile projectile) noexcept;
 std::uint32_t createGoblin(EntityManager &em, SDL_FPoint pos,  DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept;
 std::uint32_t createProjectile(EntityManager &em, Projectile type, SDL_FPoint pos, SDL_FPoint velocity, float maxSpeed, bool friendly, World &world, const Game &game) noexcept;
 std::uint32_t createChest(EntityManager &em, SDL_FPoint pos, World &world, const Game &game) noexcept;
+std::uint32_t createIceDemon(EntityManager &em, SDL_FPoint pos, DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept;
+std::uint32_t createZombie(EntityManager &em, SDL_FPoint pos, DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept;
+std::uint32_t createKnight(EntityManager &em, SDL_FPoint pos, DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept;
+std::uint32_t createLootLord(EntityManager &em, SDL_FPoint pos, DirectionalAnimationComponent::Direction dir, World &world, const Game &game) noexcept;

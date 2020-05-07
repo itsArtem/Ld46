@@ -13,9 +13,10 @@ AboutMenuState::AboutMenuState(Game &game)
 	title.dstRect.y = 50;
 
 	info.setWrappedText(game.fontc.get(1),
-		"Defend the Loot is a game made from\n"
-		"scratch by Artem Kateryncy for\n"
-		"Ludum Dare 46.\n"
+		"\"Defend the Loot!\" is a game\n"
+		"made from scratch in 48 hours\n"
+		"by Artem Kateryncy\n" 
+		"for Ludum Dare 46.\n"
 		"\n"
 		"Thanks for playing!\n"
 		"April 19, 2020",
@@ -23,7 +24,7 @@ AboutMenuState::AboutMenuState(Game &game)
 		480,
 		game.getRenderer());
 
-	info.dstRect.w = 460.0f;
+	info.dstRect.w = 470.0f;
 	info.dstRect.h = 210.0f;
 	info.dstRect.x = game.getWindowSize().x - 600.0f;
 	info.dstRect.y = 220.0f;

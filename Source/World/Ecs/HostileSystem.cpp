@@ -57,7 +57,7 @@ void HostileSystem::update(Entity &e, float delta) noexcept
 				TransformComponent *ptfc = target->getComponent<TransformComponent>();
 				rhc->attackTimer = rhc->attackDelay;
 
-				const float speed = 400.0f;
+				const float speed = 450.0f;
 				const SDL_FPoint start{tfc->tf.x + tfc->tf.w / 2 - 18, tfc->tf.y + tfc->tf.h / 2 - 18};
 				const SDL_FPoint dst{ptfc->tf.x - tfc->tf.x, ptfc->tf.y - tfc->tf.y};
 
