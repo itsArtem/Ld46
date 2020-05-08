@@ -36,6 +36,7 @@ World::World(Game &game) noexcept
 void World::update() noexcept
 {
 	const float delta = game.getDelta();
+	
 	//lightFadeTimer -= 1000 * delta;
 
 	//if (lightFadeTimer <= 0.0f)
@@ -395,8 +396,12 @@ void World::load(const std::string &path)
 	size.x = surface->w;
 	size.y = surface->h;
 
-	if (!tiles.empty()) tiles.clear();
+	tiles.clear();
 	tiles.reserve(size.x * size.y);
+
+	em.renderable.clear();
+	em.collidables.clear();
+	em.entities.clear();
 
 	if (SDL_MUSTLOCK(surface))
 		SDL_LockSurface(surface);
@@ -467,10 +472,6 @@ void World::load(const std::string &path)
 
 	SDL_FreeSurface(surface);
 
-	em.renderable.clear();
-	em.collidables.clear();
-	em.entities.clear();
-
 	const SDL_FPoint start{((size.x - 1) * Tile::Properties::size - Tile::Properties::size) / 2 + 4.0f, ((size.y - 1) * Tile::Properties::size - Tile::Properties::size) / 2 + 4.0f};
 	chest = createChest(em, start, *this, game);
 	player = createPlayer(em, {start.x, start.y + 100}, DirectionalAnimationComponent::Direction::down, *this, game);
@@ -532,7 +533,9 @@ void World::progress() noexcept
 
 		do
 			spawnCoords = getRandomSpawn();
-		while (tiles[spawnCoords.x + spawnCoords.y * size.x]->props.collidable || isSpawnTaken(spawnCoords));
+		while (tiles[spawnCoords.x + spawnCoords.y * size.x]->props.collidable 
+			|| (spawnCoords.y + 1 < size.y && tiles[spawnCoords.x + (spawnCoords.y + 1) * size.x]->props.collidable)
+			|| isSpawnTaken(spawnCoords));
 
 		positions.emplace_back(spawnCoords);
 		spawnRandomHostile({static_cast<float>(spawnCoords.x * Tile::Properties::size), static_cast<float>(spawnCoords.y * Tile::Properties::size)});

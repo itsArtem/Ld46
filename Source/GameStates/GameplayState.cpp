@@ -33,7 +33,7 @@ void GameplayState::update() noexcept
 
 		canvas.get(1).tf.x = game.getWindowSize().x - 248;
 		canvas.get(1).tf.y = game.getWindowSize().y - 80;
-		
+
 		if (canvas.get(0).isReleased())
 		{
 			game.gsm.add(std::make_unique<ShopState>(game, game.gsm, world));
@@ -54,45 +54,50 @@ void GameplayState::update() noexcept
 
 	hudm.update();
 
-	tipTimer -= 1.0f * game.getDelta();
-
-	if (tipTimer < 0.0f)
+	if (!showedFinal)
 	{
-		if (!showedMove)
+		tipTimer -= 1.0f * game.getDelta();
+
+		if (tipTimer < 0.0f)
 		{
-			hudm.msgout.showMessage("Move around with WASD.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
-			tipTimer = 5.0f;
-			showedMove = true;
-		}
-		else if (!showedShop)
-		{
-			hudm.msgout.showMessage("Select blocks by clicking the shop icon.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
-			tipTimer = 5.0f;
-			showedShop = true;
-		}
-		else if (!showedBuild)
-		{
-			hudm.msgout.showMessage("Buy blocks by left clicking.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
-			tipTimer = 5.0f;
-			showedBuild = true;
-		}
-		else if (!showedRemove)
-		{
-			hudm.msgout.showMessage("Sell blocks by right clicking.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
-			tipTimer = 5.0f;
-			showedRemove = true;
-		}
-		else if (!showedPoints)
-		{
-			hudm.msgout.showMessage("You gain points by damaging hostiles.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
-			tipTimer = 5.0f;
-			showedPoints = true;
-		}
-		else if (!showedFinal)
-		{
-			hudm.msgout.showMessage("Good luck!", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
-			tipTimer = 5.0f;
-			showedFinal = true;
+			Mix_PlayChannel(7, game.audioc.getChunk(9), 0);
+
+			if (!showedMove)
+			{
+				hudm.msgout.showMessage("Move around with WASD.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
+				tipTimer = 5.0f;
+				showedMove = true;
+			}
+			else if (!showedShop)
+			{
+				hudm.msgout.showMessage("Select blocks by clicking the shop icon.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
+				tipTimer = 5.0f;
+				showedShop = true;
+			}
+			else if (!showedBuild)
+			{
+				hudm.msgout.showMessage("Buy blocks by left clicking.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
+				tipTimer = 5.0f;
+				showedBuild = true;
+			}
+			else if (!showedRemove)
+			{
+				hudm.msgout.showMessage("Sell blocks by right clicking.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
+				tipTimer = 5.0f;
+				showedRemove = true;
+			}
+			else if (!showedPoints)
+			{
+				hudm.msgout.showMessage("You gain points by damaging hostiles.", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
+				tipTimer = 5.0f;
+				showedPoints = true;
+			}
+			else if (!showedFinal)
+			{
+				hudm.msgout.showMessage("Good luck!", 4.0f, {8.0f, game.getWindowSize().y - 190.0f});
+				tipTimer = 5.0f;
+				showedFinal = true;
+			}
 		}
 	}
 }

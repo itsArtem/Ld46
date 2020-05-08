@@ -77,6 +77,7 @@ Game::Game()
 	audioc.loadChunk("Resources/Audio/Chunks/Remove.wav");
 	audioc.loadChunk("Resources/Audio/Chunks/Select.wav");
 	audioc.loadChunk("Resources/Audio/Chunks/CantPlace.wav");
+	audioc.loadChunk("Resources/Audio/Chunks/Tip.wav");
 
 	Mix_VolumeMusic(1);
 

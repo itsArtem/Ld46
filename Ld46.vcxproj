@@ -332,6 +332,7 @@
     <Media Include="Resources\Audio\Chunks\Place.wav" />
     <Media Include="Resources\Audio\Chunks\Remove.wav" />
     <Media Include="Resources\Audio\Chunks\Select.wav" />
+    <Media Include="Resources\Audio\Chunks\Tip.wav" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />

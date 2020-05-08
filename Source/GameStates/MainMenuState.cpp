@@ -30,7 +30,7 @@ MainMenuState::MainMenuState(Game &game)
 	info.dstRect.x = game.getWindowSize().x - 600.0f;
 	info.dstRect.y = 220.0f;
 
-	version.setText(game.fontc.get(0), "Version 2.0.0", {100, 100, 100, 255}, true, game.getRenderer());
+	version.setText(game.fontc.get(0), "Version 2.1.0", {100, 100, 100, 255}, true, game.getRenderer());
 	version.dstRect.x = 4;
 	version.dstRect.y = game.getWindowSize().y - version.dstRect.h - 4;
 
