@@ -1,42 +1,7 @@
-﻿  AudioCache.cpp
-  Config.cpp
-  File.cpp
-  GameSave.cpp
-  Game.cpp
-  AboutMenuState.cpp
-  GameOverMenuState.cpp
-  GameplayState.cpp
-  LevelPassMenuState.cpp
-  MainMenuState.cpp
-  OptionsMenuState.cpp
-  PauseMenuState.cpp
-  ShopState.cpp
-  WinMenuState.cpp
-  Gui.cpp
-  GuiCanvas.cpp
-  TextButton.cpp
-  HealthBar.cpp
-  HudManager.cpp
-  Info.cpp
-  Compiling...
-  MessageOutput.cpp
-  Main.cpp
-  AttackSystem.cpp
-  CameraSystem.cpp
-  Component.cpp
-  Entity.cpp
-  EntityManager.cpp
-  HealthSystem.cpp
-  HostileSystem.cpp
-  MovementSystem.cpp
-  RenderSystem.cpp
-  AnimationTile.cpp
-  TextureTile.cpp
-  Tile.cpp
-  World.cpp
+﻿  Main.cpp
   Generating code
-  9 of 2793 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  0 of 2794 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    12 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Ld46.vcxproj -> C:\Users\Its_a\Development\Repos\Ld46\Output\x64\Release\Ld46.exe
