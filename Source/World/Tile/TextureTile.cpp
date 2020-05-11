@@ -6,15 +6,6 @@
 
 #include <functional>
 
-TextureTile::TextureTile(Properties props, const World &world, const Game &game, SDL_Texture *ss, SDL_Rect firstSrcRect, int variations) noexcept
-	: Tile{props, world, game},
-	world{world},
-	ss{ss},
-	firstSrc{firstSrcRect.x, firstSrcRect.y},
-	srcRect{firstSrcRect.x, firstSrcRect.y + firstSrcRect.h * ((props.pos.x + props.pos.y) % variations), firstSrcRect.w, firstSrcRect.h}
-{
-}
-
 void TextureTile::render(SDL_Renderer *rdr) const noexcept
 {
 	SDL_SetTextureColorMod(ss, 255, 255, 255);
@@ -142,6 +133,15 @@ void TextureTile::render(SDL_Renderer *rdr) const noexcept
 		SDL_RenderCopyF(rdr, ss, &transSrcRect, getDstRect());
 	}
 	*/
+}
+
+TextureTile::TextureTile(Properties props, const World &world, const Game &game, SDL_Texture *ss, SDL_Rect firstSrcRect, int variations) noexcept
+	: Tile{props, world, game},
+	world{world},
+	ss{ss},
+	firstSrc{firstSrcRect.x, firstSrcRect.y},
+	srcRect{firstSrcRect.x, firstSrcRect.y + firstSrcRect.h * ((props.pos.x + props.pos.y) % variations), firstSrcRect.w, firstSrcRect.h}
+{
 }
 
 GrassTile::GrassTile(SDL_Point pos, const World &world, const Game &game) noexcept

@@ -11,6 +11,9 @@ class Game;
 class TextureTile : public Tile
 {
 public:
+	void render(SDL_Renderer *rdr) const noexcept final override;
+
+protected:
 	TextureTile(Properties props, const World &world, const Game &game, SDL_Texture *ss, SDL_Rect firstSrcRect, int variations) noexcept;
 
 	TextureTile(const TextureTile &textureTile) noexcept = default;
@@ -20,8 +23,6 @@ public:
 
 	TextureTile &operator =(const TextureTile &textureTile) noexcept = default;
 	TextureTile &operator =(TextureTile &&textureTile) noexcept = default;
-	
-	void render(SDL_Renderer *rdr) const noexcept final override;
 
 private:
 	const World &world;

@@ -12,19 +12,19 @@ class Game;
 class AnimationTile : public Tile
 {
 public:
-	AnimationTile(const AnimationTile &animationTile) = default;
-	AnimationTile(AnimationTile &&animationTile) = default;
-	
-	virtual ~AnimationTile() = default;
-
-	AnimationTile &operator =(const AnimationTile &animationTile) = default;
-	AnimationTile &operator =(AnimationTile &&animationTile) = default;
-
 	void update() noexcept final override;
 	void render(SDL_Renderer *rdr) const noexcept final override;
 
 protected:
 	AnimationTile(Properties props, const World &world, const Animation &animation, const Game &game) noexcept;
+
+	AnimationTile(const AnimationTile &animationTile) = default;
+	AnimationTile(AnimationTile && animationTile) = default;
+
+	virtual ~AnimationTile() = default;
+
+	AnimationTile &operator =(const AnimationTile & animationTile) = default;
+	AnimationTile &operator =(AnimationTile && animationTile) = default;
 
 private:
 	const World &world;
