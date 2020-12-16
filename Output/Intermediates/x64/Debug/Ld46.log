@@ -1,38 +1,30 @@
 ﻿  AudioCache.cpp
+  Config.cpp
+  File.cpp
+  GameSave.cpp
   Game.cpp
   AboutMenuState.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\AboutMenuState.cpp(28,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\AboutMenuState.cpp(37,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   GameOverMenuState.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\GameOverMenuState.cpp(30,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\GameOverMenuState.cpp(39,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   GameplayState.cpp
   GameStateManager.cpp
 C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\GameStateManager.cpp(39,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   LevelPassMenuState.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\LevelPassMenuState.cpp(24,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\LevelPassMenuState.cpp(33,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   MainMenuState.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\MainMenuState.cpp(27,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\MainMenuState.cpp(38,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  OptionsMenuState.cpp
   PauseMenuState.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\PauseMenuState.cpp(25,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\PauseMenuState.cpp(35,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   ShopState.cpp
   WinMenuState.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\WinMenuState.cpp(31,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\WinMenuState.cpp(40,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Animation.cpp
   FontCache.cpp
   Gui.cpp
   GuiCanvas.cpp
   TextButton.cpp
+  Generating Code...
+  Compiling...
   TextureButton.cpp
   TextureTextButton.cpp
   HealthBar.cpp
   HudManager.cpp
-  Generating Code...
-  Compiling...
   Info.cpp
   MessageOutput.cpp
   Text.cpp
@@ -47,18 +39,12 @@ C:\Users\Its_a\Development\Repos\Ld46\Source\GameStates\WinMenuState.cpp(40,42):
   HealthSystem.cpp
   HostileSystem.cpp
   MovementSystem.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\Ecs\MovementSystem.cpp(281,1): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\Ecs\MovementSystem.cpp(281,1): warning C4244: '-=': conversion from 'const float' to 'int', possible loss of data
   RenderSystem.cpp
   TextureTile.cpp
+  Generating Code...
+  Compiling...
   AnimationTile.cpp
   Tile.cpp
   World.cpp
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(86,61): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(87,61): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,71): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,71): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,118): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
-C:\Users\Its_a\Development\Repos\Ld46\Source\World\World.cpp(450,118): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Generating Code...
   Ld46.vcxproj -> C:\Users\Its_a\Development\Repos\Ld46\Output\x64\Debug\Ld46.exe

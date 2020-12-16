@@ -15,7 +15,7 @@ AboutMenuState::AboutMenuState(Game &game)
 	info.setWrappedText(game.fontc.get(1),
 		"\"Defend the Loot!\" is a game\n"
 		"made from scratch in 48 hours\n"
-		"by Artem Kateryncy\n" 
+		"by Artem Katerynych\n" 
 		"for Ludum Dare 46.\n"
 		"\n"
 		"Thanks for playing!\n"
